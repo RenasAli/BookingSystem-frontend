@@ -27,7 +27,7 @@ interface RoleGuardProps {
     const role = Cookies.get("role");
 
     if (!role || !allowedRoles.includes(role)) {
-      if (role === "company_Admin") {
+      if (role === "company_admin") {
         return <Navigate to="/dashboard/bookings" />
       }
       return <Navigate to="/" /> // Redirect back to home if role is not allowed
@@ -50,7 +50,7 @@ interface RoleGuardProps {
     const role = Cookies.get("role");
   
     if (role) {
-      if (role === "company_Admin") {
+      if (role === "company_admin") {
         return <Navigate to="/dashboard/bookings" />
       }
       return <Navigate to="/" />;

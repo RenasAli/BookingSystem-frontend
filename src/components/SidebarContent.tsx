@@ -9,7 +9,7 @@ const SidebarContent = ({onClose}: sidebarContentProps ) => {
 
   return (
     <VStack align="flex-start"  p={6}>
-      <RoleGuard allowedRoles={["company_Admin"]}>
+      <RoleGuard allowedRoles={["company_admin"]}>
         
         <Button onClick={onClose} as={Link} to="/dashboard/bookings" variant="ghost" w="full" justifyContent="flex-start">
           Bookings
