@@ -10,15 +10,14 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
     <Flex>
-      
+      <Show above="lg" >
+        <DesktopSidebar/>
+      </Show>
+      <Hide /*above="lg"*/>
+        <MobileSidebar/>
+      </Hide>
       <Container>
         <Routes>
-            <Show above="lg" >
-              <DesktopSidebar/>
-            </Show>
-            <Hide above="lg">
-              <MobileSidebar/>
-            </Hide>
             <Route path="/login" element={<Login />} />
             <Route path="/dashboard/bookings" element={<Bookings />} />
             <Route path="/dashboard/staff" element={<Staff />} />
