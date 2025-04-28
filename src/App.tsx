@@ -13,7 +13,7 @@ function App() {
       <Show above="lg" >
         <DesktopSidebar/>
       </Show>
-      <Hide /*above="lg"*/>
+      <Hide above="lg">
         <MobileSidebar/>
       </Hide>
       <Container>
