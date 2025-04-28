@@ -1,5 +1,4 @@
 import { Button, VStack } from "@chakra-ui/react";
-import { RoleGuard } from "../auth/RoleGuard";
 import { Link } from "react-router-dom";
 
 interface sidebarContentProps {
@@ -9,21 +8,26 @@ const SidebarContent = ({onClose}: sidebarContentProps ) => {
 
   return (
     <VStack align="flex-start"  p={6}>
-      <RoleGuard allowedRoles={["company_admin"]}>
-        
+      
+        <Button onClick={onClose} as={Link} to="/dashboard/companies" variant="ghost" w="full" justifyContent="flex-start">
+          Virksomheder
+        </Button>
         <Button onClick={onClose} as={Link} to="/dashboard/bookings" variant="ghost" w="full" justifyContent="flex-start">
-          Bookings
+          Kalender
         </Button>
         <Button onClick={onClose} as={Link} to="/dashboard/staff" variant="ghost" w="full" justifyContent="flex-start">
           Medarbejder
         </Button>
-        <Button variant="ghost" w="full" justifyContent="flex-start">
-          Settings
+        <Button onClick={onClose} as={Link} to="/dashboard/services" variant="ghost" w="full" justifyContent="flex-start">
+          Services
         </Button>
+        <Button onClick={onClose} as={Link} to="/dashboard/settings" variant="ghost" w="full" justifyContent="flex-start">
+          Indstillinger
+        </Button>
+
         <Button variant="ghost" w="full" justifyContent="flex-start">
           Profile
         </Button>
-      </RoleGuard>
       </VStack>
   )
 }
