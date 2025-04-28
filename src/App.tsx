@@ -15,7 +15,7 @@ function App() {
       </Show>
       <Container>
         <Routes>
-            <Route path="/" element={<Login />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/dashboard/bookings" element={<Bookings />} />
             <Route path="/dashboard/staff" element={<Staff />} />
         </Routes>
