@@ -11,9 +11,13 @@ import { useState } from "react";
 import LoginUser from "../types/LoginUser";
 import Cookies from "js-cookie";
 import handleLogin from "../auth/handleLogin";
+import { useNavigate } from "react-router-dom";
+
 
 
 const Logind = ()=> {
+  const navigate = useNavigate();
+
   const toast = useToast();
   
   const [email, setEmail] = useState("");
@@ -29,7 +33,14 @@ const Logind = ()=> {
       duration: 2000,
       isClosable: true,
     });
-    handleLogin(loginUser, toast).then((user)=> Cookies.set("role", user.user.role))
+    handleLogin(loginUser, toast).then((user)=> { 
+      Cookies.set("role", user.user.role);
+      if(user.user.role === "admin"){
+        navigate("/dashboard/companies")
+      } else {
+        navigate("/dashboard/bookings")
+      }
+    });
   }
 
   return (
