@@ -19,7 +19,7 @@ export const handleLogout = async (
         duration: 4000,
         isClosable: true,
       });
-      navigate("/");
+      navigate("/login");
     } else {
       toast({
         title: "Log ud mislykkedes",
