@@ -33,7 +33,6 @@ import {
   }: CreateCompanyFormProps) => {
 
     
-
   const handleWorkdayChange = (
       index: number,
       field: "isOpen" | "openTime" | "closeTime",
@@ -108,8 +107,9 @@ import {
                     <FormControl>
                       <FormLabel>Logo</FormLabel>
                       <Input
-                        type="text"
-                        onChange={(e) => onChange("logo", e.target.value)}
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => onChange("logo" , e.target.files?.[0])}
                       />
                     </FormControl>
           

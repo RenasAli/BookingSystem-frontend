@@ -17,6 +17,7 @@ import {
     TabPanels,
     Tabs,
     Select,
+    Image,
     useDisclosure
   } from "@chakra-ui/react";
   import { FormEvent } from "react";
@@ -114,9 +115,14 @@ import ConfirmDialogBox from "./ConfirmDialogBox";
                     <FormControl>
                       <FormLabel>Logo</FormLabel>
                       <Input
-                        type="text"
-                        value={company?.logo || ""}
-                        onChange={(e) => onChange("logo", e.target.value)}
+                        type="file"
+                        onChange={(e) => onChange("logo", e.target.files?.[0])}
+                      />
+                      <Image
+                        borderRadius='full'
+                        boxSize='150px'
+                        src={company?.logo || ""}
+                        alt='Dan Abramov'
                       />
                     </FormControl>
           

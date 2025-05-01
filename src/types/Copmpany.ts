@@ -21,7 +21,7 @@ export default interface Company {
     id?: number;
     cvr: string;
     url: string;
-    logo: string;
+    logo?: File;
     confirmationMethod: string;
     companyEmail: string;
     adminEmail: string;

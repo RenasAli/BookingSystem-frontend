@@ -21,7 +21,7 @@ const CreateCompany = () => {
     const [company, setCompany] = useState<CompanyRequest>({
         cvr: "",
         url: "",
-        logo: "",
+        logo: undefined,
         confirmationMethod: "",
         companyEmail: "",
         adminEmail: "",
