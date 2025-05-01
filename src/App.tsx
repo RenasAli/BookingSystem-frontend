@@ -1,13 +1,22 @@
 import { Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Flex, Hide, Show } from "@chakra-ui/react";
-import { DesktopSidebar, Container, MobileSidebar } from './sections'
-import { Login, Bookings, Staff, Companies, CreateCompany, Services, Settings} from "./pages";
+import { Dashboard} from './sections'
+import { Login} from "./pages";
 
 function App() {
   const queryClient = new QueryClient();
 
   return (
+    <QueryClientProvider client={queryClient}>
+
+      
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/dashboard/*" element={<Dashboard/>} />
+      </Routes>
+    </QueryClientProvider>
+  );
+  /*return (
     <QueryClientProvider client={queryClient}>
             <Hide above="lg">
         <MobileSidebar/>
@@ -30,7 +39,7 @@ function App() {
       </Container>
     </Flex>
     </QueryClientProvider>
-  );
+  );*/
 }
 
 export default App;
