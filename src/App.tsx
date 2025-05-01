@@ -16,30 +16,7 @@ function App() {
       </Routes>
     </QueryClientProvider>
   );
-  /*return (
-    <QueryClientProvider client={queryClient}>
-            <Hide above="lg">
-        <MobileSidebar/>
-      </Hide>
-    <Flex>
-      <Show above="lg" >
-        <DesktopSidebar/>
-      </Show>
-      <Container>
-        <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/dashboard/bookings" element={<Bookings />} />
-            <Route path="/dashboard/staff" element={<Staff />} />
-            <Route path="/dashboard/companies" element={<Companies />} />
-            <Route path="/dashboard/companies/create-company" element={<CreateCompany />} />
-            <Route path="/dashboard/services" element={<Services />} />
-            <Route path="/dashboard/settings" element={<Settings />} />
-            <Route path="/dashboard/companies/settings" element={<Settings />} />
-        </Routes>
-      </Container>
-    </Flex>
-    </QueryClientProvider>
-  );*/
+  
 }
 
 export default App;
