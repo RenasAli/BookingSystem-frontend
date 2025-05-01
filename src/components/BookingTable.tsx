@@ -1,7 +1,6 @@
 import { Box, Button, Flex, Grid, IconButton, Input, Spacer, Text } from "@chakra-ui/react"
 import { GrNext } from "react-icons/gr";
 import { GrPrevious } from "react-icons/gr";
-import { useState } from "react";
 import dayjs from "dayjs";
 
 const generateTimes = (start = 9, end = 18) => {
@@ -17,37 +16,44 @@ const generateTimes = (start = 9, end = 18) => {
     return times;
 };
 
-const BookingTable = () => {
+interface BookingTableProps {
+  selectedTime: string | null;
+  selectedDate: string;
+  onTimeSelect: (time: string) => void;
+  onDateChange: (date: string) => void;
+  onBookClick: () => void;
+}
 
-    const today = dayjs().startOf("day");
-    const [selectedDate, setSelectedDate] = useState(today);
+const BookingTable = ({
+  selectedTime,
+  selectedDate,
+  onTimeSelect,
+  onDateChange,
+  onBookClick,
+}: BookingTableProps) => {
+  const today = dayjs().startOf("day");
+  const selected =dayjs(selectedDate);
+  
+  const times = generateTimes();
+    
+  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const date = dayjs(e.target.value);
+    if (date.isBefore(today, "day")) return;
+    onDateChange(date.startOf("day").format("DD-MM-YYYY"));
+  };
 
-    const [selectedTime, setSelectedTime] = useState<string | null>(null);
-    
-    const times = generateTimes();
-     
-      const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const date = dayjs(e.target.value);
-      
-        if (date.isBefore(today, "day")) return;
-        setSelectedDate(date.startOf("day"));
-        setSelectedTime(null);
-      };
-    
-      const handleNextDay = () => {
-        setSelectedDate((prev) => prev.add(1, "day"));
-        setSelectedTime(null);
-      };
-    
-      const handlePrevDay = () => {
-        if (selectedDate.isAfter(today)) {
-          setSelectedDate((prev) => prev.subtract(1, "day"));
-          setSelectedTime(null);
-        }
-      };
+  const handleNextDay = () => {
+    onDateChange(selected.add(1, "day").format("DD-MM-YYYY"));
+  };
+
+  const handlePrevDay = () => {
+    if (selected.isAfter(today)) {
+      onDateChange(selected.subtract(1, "day").format("DD-MM-YYYY"));
+    }
+  };
+  
   return (
-    <Box>
-      <Box p={8} borderWidth='1px' borderRadius='lg'>
+    <Box p={8} borderWidth='1px' borderRadius='lg'>
       <Flex  marginBottom={5}>
         <IconButton
           variant='outline'
@@ -55,13 +61,13 @@ const BookingTable = () => {
           aria-label='Previous'
           icon={<GrPrevious/>}
           onClick={handlePrevDay}
-          isDisabled={selectedDate.isSame(today, "day")}
+          isDisabled={selected.isSame(today, "day")}
         />
         <Spacer />
         <Input
           fontWeight={600}
           type="date"
-          value={selectedDate.format("YYYY-MM-DD")}
+          value={selected.format("YYYY-MM-DD")}
           onChange={handleDateChange}
           min={dayjs().format("YYYY-MM-DD")}
           gap={2}
@@ -81,7 +87,7 @@ const BookingTable = () => {
         {times.map((time) => (
           <Button
             key={time}
-            onClick={() => setSelectedTime(time)}
+            onClick={() => onTimeSelect(time)}
             colorScheme={selectedTime === time ? "teal" : "gray"}
             variant={selectedTime === time ? "solid" : "outline"}
           >
@@ -91,12 +97,21 @@ const BookingTable = () => {
       </Grid>
       {selectedTime && (
         <Text mt={4} fontWeight="medium">
+          Valgt dato: {selected.format("DD-MM-YYYY")}
+          <br />
           Valgt tid: {selectedTime}
         </Text>
       )}
+      <Button
+        mt={2}
+        onClick={onBookClick}
+        isDisabled={!selectedTime}
+        colorScheme="green"
+      >
+        Book tid
+      </Button>
     </Box>
-    </Box>
-  )
-}
+  );
+};
 
 export default BookingTable
