@@ -12,12 +12,12 @@ const Services = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [service, setservice] = useState<Service>();
   const serviceQuery = useService();
-  const updateMutation = useCreateMutation<Service>({ endpoint: `services/${service?.id}`, method: "PUT", onSuccess: async() => {
+  const updateMutation = useCreateMutation<Service>({ endpoint: `service/${service?.id}`, method: "PUT", onSuccess: async() => {
       await queryClient.invalidateQueries({queryKey: ['services', service?.id]});
       await queryClient.refetchQueries({ queryKey: ["services",] });
       setservice(undefined)
   } });
-  const createMutation = useCreateMutation<Service>({ endpoint: `services`, method: "POST", onSuccess: async() => {
+  const createMutation = useCreateMutation<Service>({ endpoint: `service`, method: "POST", onSuccess: async() => {
     await queryClient.invalidateQueries({
         queryKey: ['services', service?.id]
       })
