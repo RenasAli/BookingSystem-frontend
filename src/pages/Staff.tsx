@@ -14,15 +14,15 @@ const Staff = () => {
   const [staff, setStaff] = useState<Staffs>();
   const staffQuery = useStaff();
   const updateMutation = useCreateMutation<Staffs>({ endpoint: `staff/${staff?.id}`, method: "PUT", onSuccess: async() => {
-    await queryClient.invalidateQueries({queryKey: ['staff', staff?.id]});
-    await queryClient.refetchQueries({ queryKey: ["staff",] });
-    setStaff(undefined)
-} });
+      await queryClient.invalidateQueries({queryKey: ['staff', staff?.id]});
+      await queryClient.refetchQueries({ queryKey: ["staff",] });
+      setStaff(undefined)
+  } });
   const createMutation = useCreateMutation<Staffs>({ endpoint: `staff`, method: "POST", onSuccess: async() => {
     await queryClient.invalidateQueries({
         queryKey: ['staff', staff?.id]
-    })
-} });
+      })
+  } });
   if (staffQuery.isLoading) {
     return <div>Loading...</div>;
   }
