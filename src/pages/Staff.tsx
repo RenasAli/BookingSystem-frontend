@@ -1,6 +1,6 @@
 import { Button, SimpleGrid, useDisclosure} from "@chakra-ui/react"
 import useStaff from "../hooks/useStaff";
-import Staffs from "../types/Stoff";
+import Staffs from "../types/Staff";
 import { StaffCard } from "../components";
 import { useState } from "react";
 import { useCreateMutation } from "../hooks/useCreateMutation";

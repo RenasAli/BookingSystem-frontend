@@ -1,5 +1,5 @@
 import { Button, Card, CardBody, CardFooter, CardHeader, Heading, Text } from "@chakra-ui/react";
-import Staff from "../types/Stoff";
+import Staff from "../types/Staff";
 interface staffCardProps {
     id: number | null,
     name: string | null,

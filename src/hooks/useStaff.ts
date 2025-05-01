@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import Staff from "../types/Stoff";
+import Staff from "../types/Staff";
 import ApiClient from "../service/apiClient";
 
 export type StaffsResponse = Staff[];
