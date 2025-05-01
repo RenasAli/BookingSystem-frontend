@@ -34,7 +34,7 @@ const Logind = ()=> {
       isClosable: true,
     });
     handleLogin(loginUser, toast).then((user)=> { 
-      Cookies.set("role", user.user.role);
+      Cookies.set("role", user?.user?.role);
       if(user.user.role === "admin"){
         navigate("/dashboard/companies")
       } else {
