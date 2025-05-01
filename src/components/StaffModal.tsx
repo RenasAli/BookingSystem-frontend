@@ -12,7 +12,7 @@ import {
     Input,
   } from "@chakra-ui/react";
   import {  FormEvent } from "react";
-import Staff from "../types/Stoff";
+import Staff from "../types/Staff";
   
   interface StaffModalProps {
     isOpen: boolean;
