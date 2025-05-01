@@ -22,32 +22,51 @@ class ApiClient<T, R = T> {
       .then((response) => response.data);
     
   
-    create = (data: T,  method: Method = 'POST',) => 
-      axiosInstance({
-        url: this.endpoint,
-        method, // use method dynamically (POST, PATCH, PUT, etc.)
-        data,
-      })
-      .then((response) => {
-          return response;
-        })
-        .catch((error) => {
-            throw error;
+  create = (data: T, method: Method = 'POST') => {
+    let payload: T | FormData = data;
+    let headers = {};
+      
+    // Auto-detect if File exists → use FormData
+    if (data && typeof data === 'object' && Object.values(data).some((v) => v instanceof File)) {
+        const formData = new FormData();
+        for (const [key, value] of Object.entries(data)) {
+          if (value !== undefined && value !== null) {
+            if (key === 'workday') {
+              formData.append(key, JSON.stringify(value)); // 👈 manual serialization
+            } else {
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              formData.append(key, value as any);
+            }
+          }
         }
-      );
+        payload = formData;
+        headers = { 'Content-Type': 'multipart/form-data' }; // axios handles this anyway, but safe
+    }
+      
+    return axiosInstance({
+      url: this.endpoint,
+      method,
+      data: payload,
+      headers,
+    })
+    .then((response) => response)
+    .catch((error) => {
+      throw error;
+    });
+  };
+      
     
 
-    delete = () => {
-      axiosInstance
-      .delete(this.endpoint)
-      .then((response) => {
-        return response.data;
-      })
-      .catch((error) => {
-          throw error;
-      }
-    );
-    }
+  delete = () => {
+    axiosInstance
+    .delete(this.endpoint)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      throw error;
+    });
+  }
 
 
 }

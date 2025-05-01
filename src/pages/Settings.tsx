@@ -31,6 +31,11 @@ const Settings = () => {
       navigate("/dashboard/bookings")
     }
   }});
+  const updateLogoMutation = useCreateMutation<object>({ endpoint: `company/logo/${company?.id}`, method: "PUT", onSuccess: async() => {
+    await queryClient.invalidateQueries({queryKey: ['company', company?.id]});
+    await queryClient.refetchQueries({ queryKey: ["company",] });
+    //setCompany((prev) => ({ ...prev, logo: "" } as CompanyRequest));
+  }});
 
   const deleteMutation = useDeleteMutation({ 
         endpoint: `company/${company?.id}`, 
@@ -49,6 +54,7 @@ const Settings = () => {
   };
 
  const updateCompanyField = (field: keyof CompanyRequest, value: unknown) => {
+
     setCompany((prev) => {
       if (!prev) return prev;
   
@@ -65,7 +71,8 @@ const Settings = () => {
           updatedCompany.phone = value as string;
           break;
         case "logo":
-          updatedCompany.logo = value as string;
+          console.log("test1: "+value);
+          updateLogoMutation.mutate({logo: value as File});
           break;
         case "url":
           updatedCompany.url = value as string;
