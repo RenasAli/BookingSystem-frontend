@@ -23,6 +23,7 @@ import {
   import { FormEvent } from "react";
   import Company, { CompanyRequest } from "../types/Copmpany";
 import ConfirmDialogBox from "./ConfirmDialogBox";
+import { RoleGuard, RoleProtectedElement } from "../auth/RoleGuard";
   
   interface CompanyFormProps {
     company: Company | undefined;
@@ -78,20 +79,24 @@ import ConfirmDialogBox from "./ConfirmDialogBox";
                   <SimpleGrid columns={[1, null, 2]} spacing={8} >
                   <FormControl>
                       <FormLabel>Virksomhedens Navn</FormLabel>
-                      <Input
-                        type="text"
-                        value={company?.name || ""}
-                        onChange={(e) => onChange("companyName", e.target.value)}
-                      />
+                      <RoleProtectedElement allowedRoles={['admin']}>
+                        <Input
+                          type="text"
+                          value={company?.name || ""}
+                          onChange={(e) => onChange("companyName", e.target.value)}
+                        />
+                      </RoleProtectedElement>
                     </FormControl>
           
                     <FormControl>
                       <FormLabel>CVR</FormLabel>
-                      <Input
-                        type="number"
-                        value={company?.cvr || ""}
-                        onChange={(e) => onChange("cvr", e.target.value)}
-                      />
+                      <RoleProtectedElement allowedRoles={['admin']}>
+                        <Input
+                          type="number"
+                          value={company?.cvr || ""}
+                          onChange={(e) => onChange("cvr", e.target.value)}
+                        />
+                      </RoleProtectedElement>
                     </FormControl>
           
                     <FormControl>
@@ -114,10 +119,12 @@ import ConfirmDialogBox from "./ConfirmDialogBox";
           
                     <FormControl>
                       <FormLabel>Logo</FormLabel>
-                      <Input
-                        type="file"
-                        onChange={(e) => onChange("logo", e.target.files?.[0])}
-                      />
+                      <RoleGuard allowedRoles={["admin"]}>
+                        <Input
+                          type="file"
+                          onChange={(e) => onChange("logo", e.target.files?.[0])}
+                        />
+                      </RoleGuard>
                       <Image
                         borderRadius='full'
                         boxSize='150px'
@@ -128,22 +135,26 @@ import ConfirmDialogBox from "./ConfirmDialogBox";
           
                     <FormControl>
                       <FormLabel>URL</FormLabel>
-                      <Input
-                        type="text"
-                        value={company?.url || ""}
-                        onChange={(e) => onChange("url", e.target.value)}
-                      />
+                      <RoleProtectedElement allowedRoles={['admin']}>
+                        <Input
+                          type="text"
+                          value={company?.url || ""}
+                          onChange={(e) => onChange("url", e.target.value)}
+                        />
+                      </RoleProtectedElement>
                     </FormControl>
                     <FormControl>
                       <FormLabel>Bekræftelsesmetode</FormLabel>
-                      <Select
-                        placeholder="Vælg en metode"
-                        value={company?.confirmationMethod || ""}
-                        onChange={(e) => onChange("confirmationMethod", e.target.value)}
-                      >
-                        <option value="confirmation_code">SMS Bekræftelse</option>
-                        <option value="depositum">Depositum</option>
-                      </Select>
+                      <RoleProtectedElement allowedRoles={['admin']}>
+                        <Select
+                          placeholder="Vælg en metode"
+                          value={company?.confirmationMethod || ""}
+                          onChange={(e) => onChange("confirmationMethod", e.target.value)}
+                        >
+                          <option value="confirmation_code">SMS Bekræftelse</option>
+                          <option value="depositum">Depositum</option>
+                        </Select>
+                      </RoleProtectedElement>
                     </FormControl>
                   </SimpleGrid>
                   <Text mt={10} fontSize="small">Oprettet {company?.createdAt?.toString().slice(0, 10)} </Text>
@@ -268,28 +279,32 @@ import ConfirmDialogBox from "./ConfirmDialogBox";
 
           
           <Stack direction="row" spacing={4} mr={3}  justify="flex-end">
-            <Button 
-              colorScheme="red"
-              isLoading={deleteIsPending}
-              onClick={onOpen}
-            >
-              Slet Virksomheden
-            </Button>
+            <RoleGuard allowedRoles={["admin"]}>
+              <Button 
+                colorScheme="red"
+                isLoading={deleteIsPending}
+                onClick={onOpen}
+              >
+                Slet Virksomheden
+              </Button>
+            </RoleGuard>
             <Button colorScheme="green" type="submit">
               Gem
             </Button>
           </Stack>
           </Tabs>
         </form>
-        <ConfirmDialogBox
-                header="Advarsel"
-                description="Er du sikker på, at du vil slette denne virksomhed?"
-                confirmButtonText="Slet"
-                confirmIsLoading={deleteIsPending}
-                isOpen={isOpen}
-                handleConfirmClick={deleteMutation}
-                onClose={onClose}
-            />
+        <RoleGuard allowedRoles={["admin"]}>
+          <ConfirmDialogBox
+            header="Advarsel"
+            description="Er du sikker på, at du vil slette denne virksomhed?"
+            confirmButtonText="Slet"
+            confirmIsLoading={deleteIsPending}
+            isOpen={isOpen}
+            handleConfirmClick={deleteMutation}
+            onClose={onClose}
+          />
+        </RoleGuard>
       </Box>
     );
   };

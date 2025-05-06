@@ -5,6 +5,7 @@ import { ServiceCard, ServiceModal } from "../components";
 import { useState } from "react";
 import { useCreateMutation } from "../hooks/useCreateMutation";
 import { useQueryClient } from "@tanstack/react-query";
+import { RoleGuard } from "../auth/RoleGuard";
 
 const Services = () => {
   const queryClient = useQueryClient();
@@ -51,9 +52,11 @@ const Services = () => {
   };
   return (
     <>
-    <Button colorScheme="green" mr={3} onClick={onOpen}>
-      Opret Service
-    </Button>
+    <RoleGuard allowedRoles={["company_admin"]}>
+      <Button colorScheme="green" mr={3} onClick={onOpen}>
+        Opret Service
+      </Button>
+    </RoleGuard>
     <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
         {serviceQuery?.data?.map((service: Service, index: number) => {
           return <ServiceCard
@@ -67,7 +70,9 @@ const Services = () => {
         />;
         })}
     </SimpleGrid>
-    <ServiceModal isOpen={isOpen} onClose={onClose} service={service} onChange={updateServiceField} onSubmit={handleSubmit} isEditing={!!service?.id}/>
+    <RoleGuard allowedRoles={["company_admin"]}>
+      <ServiceModal isOpen={isOpen} onClose={onClose} service={service} onChange= {updateServiceField} onSubmit={handleSubmit} isEditing={!!service?.id}/>
+    </RoleGuard>
     </>
   )
 }
