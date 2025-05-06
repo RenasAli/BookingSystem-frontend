@@ -1,16 +1,16 @@
-import { Image, Heading, Text, HStack, Container, Box, SimpleGrid, Spacer, Select, FormControl, Input, FormLabel, Button } from "@chakra-ui/react";
+import { Text, HStack, Container, Box, Spacer, Select } from "@chakra-ui/react";
 import BookingTable from "../components/BookingTable";
 import { useCompanyByUrl } from "../hooks/useCompany";
 import { useParams } from "react-router-dom";
-import { FaPhone } from "react-icons/fa";
-import { MdEmail } from "react-icons/md";
 import { useEffect, useState } from "react";
 import useTimeSlot from "../hooks/useTimeSlot";
 import dayjs from "../utils/dayjs";
 import { useCreateMutation } from "../hooks/useCreateMutation";
 import BookingRequest from "../types/BookingRequest";
 import SelectedTimeSlot from "../types/SelectedTimeSlot";
-import { IoArrowBackOutline } from "react-icons/io5";
+import PublicBookingFooter from "../components/PublicBookingFooter";
+import PublicBookingHeader from "../components/PublicBookingHeader";
+import CreateBookingForm from "../components/CreateBookingForm";
 
 const PublicBooking = () => {
     const {companyUrl} = useParams()
@@ -70,6 +70,14 @@ const PublicBooking = () => {
         setBooking((prev) => ({ ...prev, [field]: value } as BookingRequest));
     };
 
+    const handleBack =()=> {
+        setSelectedTime({
+            startTime: "",
+            endTime: "",
+            isSelected: false
+        });
+    }
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setBookingField("companyId", company?.id)
@@ -83,29 +91,19 @@ const PublicBooking = () => {
 
   return (
     <>
-    <HStack 
-        p={1} 
-        bg="white"
-        w="100%"
-        position="fixed"
-        top={0}
-        zIndex={10}
-        boxShadow="md"
-    >
-        <Image
-            borderRadius='full'
-            boxSize='75px'
-            src='https://bit.ly/dan-abramov'
-            alt='Dan Abramov'
-        />      
-        <Heading size='lg'>{company?.name}</Heading>
-    </HStack>
+    <PublicBookingHeader logo={company?.logo?? ""} name={company?.name ?? ""} />
     <Container maxW={750} p={8} pt="80px">
         <Box borderWidth='1px' p={5} mt={5} boxShadow="lg">
             <HStack>
                 <Text mb={5}>Bestil til hos {company?.name}</Text>
                 <Spacer/>
-                <Select value={String(selectedServiceId)} onChange={handleChange} maxW="200px" mb={5} isDisabled={selectedTime?.isSelected}>
+                <Select
+                    value={String(selectedServiceId)}
+                    onChange={handleChange}
+                    maxW="200px"
+                    mb={5}
+                    isDisabled={selectedTime?.isSelected}
+                >
                     {company?.services.map((service) => (
                         <option key={service.id} value={service.id}>
                         {service.name}
@@ -113,33 +111,15 @@ const PublicBooking = () => {
                     ))}
                 </Select>
             </HStack>
-            {selectedTime?.isSelected ? <Box>
-                <Box p={4} borderWidth='1px' borderRadius='lg'>
-                    <form  onSubmit={handleSubmit}>
-                        <FormControl>
-                            <FormLabel>Navn</FormLabel>
-                            <Input
-                                type="text"
-                                mb={5}
-                                onChange={(e)=> setBookingField("customerName",  e.target.value)}
-                            />
-                            <FormLabel>Mobile Nr.</FormLabel>
-                            <Input
-                                type="number"
-                                mb={5}
-                                onChange={(e)=> setBookingField("customerPhone",  e.target.value)}
-                            />
-                        </FormControl>
-                            <Button leftIcon={<IoArrowBackOutline />} colorScheme='blue' variant='solid'>
-                                Tilbage
-                            </Button>
-
-                        <Button colorScheme="green" type="submit">
-                            Godkend
-                        </Button>
-                    </form>
-                </Box>
-            </Box>: 
+            {selectedTime?.isSelected ? 
+            <CreateBookingForm
+                selectedDate={selectedDate}
+                selectedTime={selectedTime.startTime}
+                handleSubmit={handleSubmit}
+                setBookingField={setBookingField}
+                handleBack={handleBack}
+            />
+            : 
             <BookingTable
                 TimeSlots={timeSlotQuery?.data ?? []}
                 selectedDate={selectedDate}
@@ -149,40 +129,8 @@ const PublicBooking = () => {
         </Box>
     </Container>
 
-    <Container maxW={750}  p={8} >
-        <SimpleGrid columns={[1,2,2]} spacing='20px'>
-            <Box borderWidth='1px' borderRadius="lg" p={5} height='250px' boxShadow="lg" minW="217px">
-                <Heading size='xs'>Åbningstider:</Heading>
-                {company?.workday.map((day) => (
-                    <HStack mt={1} key={day.weekdayId}>
-                        <Text>{["Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag", "Søndag"][day.weekdayId - 1]}</Text>
-                        <Spacer />
-                        <Text>{day.isOpen ? day.openTime?.split(":").slice(0, 2).join(":") + " - " + day.closeTime?.split(":").slice(0, 2).join(":") :"Lukket"}</Text>
-                    </HStack>
-                ))}
-            </Box>
-            <Box>
-            <Box borderWidth='1px' borderRadius="lg" p={4} height='120px' boxShadow="lg">
-                <Heading size='xs'>Kontakt os</Heading>
-                <HStack mt={1}>
-                    <FaPhone />
-                    <Text > {company?.phone}</Text>
-                </HStack>
-                <HStack mt={1}>
-                    <MdEmail />
-                    <Text > {company?.email}</Text>
-                </HStack>
-            </Box>
-            <Box borderWidth='1px' borderRadius="lg" p={4} mt="20px" height='110px' boxShadow="lg">
-                <Heading size='xs'>Adresse:</Heading>
-                <Text mt={1}>{company?.address.street}</Text>
-                <Text>{company?.address.zipCode} {company?.address.city}</Text>
-            </Box>
-            </Box>
-        </SimpleGrid>
-    </Container>        
-
-  </>
+    <PublicBookingFooter company={company}/>
+    </>
   )
 }
 
