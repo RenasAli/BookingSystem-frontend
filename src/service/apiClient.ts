@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig, Method } from "axios";
-import BASE_URL from "../util/baseUrl";
+import BASE_URL from "../utils/baseUrl";
 
 
 const axiosInstance = axios.create({

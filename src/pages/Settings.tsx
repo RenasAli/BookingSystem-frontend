@@ -71,7 +71,6 @@ const Settings = () => {
           updatedCompany.phone = value as string;
           break;
         case "logo":
-          console.log("test1: "+value);
           updateLogoMutation.mutate({logo: value as File});
           break;
         case "url":

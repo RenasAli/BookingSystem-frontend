@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Dashboard} from './sections'
-import { Login} from "./pages";
+import { Login, PublicBooking} from "./pages";
 
 function App() {
   const queryClient = new QueryClient();
@@ -11,6 +11,8 @@ function App() {
 
       
       <Routes>
+
+        <Route path="/public/booking/:companyUrl" element={<PublicBooking />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard/*" element={<Dashboard/>} />
       </Routes>
