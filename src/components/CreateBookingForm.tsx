@@ -18,41 +18,42 @@ const CreateBookingForm = ({
     handleBack,
 }:CreateBookingFormProps ) => {
   return (
-<Box>
-                <Box p={4} borderWidth='1px' borderRadius='lg'>
-                    <Card  variant='elevated' mb={5}>
-                        <CardBody>
-                            <Text>{selectedDate.format("DD-MM-YYYY")}</Text>
-                            <Text>Kl: {selectedTime}</Text>
-                        </CardBody>
-                    </Card>
-                    <form  onSubmit={handleSubmit}>
-                        <FormControl>
-                            <FormLabel>Navn</FormLabel>
-                            <Input
-                                type="text"
-                                mb={5}
-                                onChange={(e)=> setBookingField("customerName",  e.target.value)}
-                            />
-                            <FormLabel>Mobile Nr.</FormLabel>
-                            <Input
-                                type="number"
-                                mb={5}
-                                onChange={(e)=> setBookingField("customerPhone",  e.target.value)}
-                            />
-                        </FormControl>
-                        <HStack>
-                            <Button colorScheme='gray' variant='solid' onClick={handleBack}>
-                                Tilbage
-                            </Button>
-                            <Spacer/>
-                            <Button colorScheme="green" type="submit">
-                                Godkend
-                            </Button>
-                        </HStack>
-                    </form>
-                </Box>
-            </Box>
+    <Box>
+        <Box p={4} borderWidth='1px' borderRadius='lg'>
+            
+            <form  onSubmit={handleSubmit}>
+                <FormControl>
+                    <FormLabel>Navn</FormLabel>
+                    <Input
+                        type="text"
+                        mb={5}
+                        onChange={(e)=> setBookingField("customerName",  e.target.value)}
+                    />
+                    <FormLabel>Mobile Nr.</FormLabel>
+                    <Input
+                        type="number"
+                        mb={5}
+                        onChange={(e)=> setBookingField("customerPhone",  e.target.value)}
+                    />
+                </FormControl>
+                <Card  variant='elevated' mb={5}>
+                    <CardBody>
+                        <Text>{selectedDate.format("DD-MM-YYYY")}</Text>
+                        <Text>Kl: {selectedTime}</Text>
+                    </CardBody>
+                </Card>
+                <HStack>
+                    <Button colorScheme='gray' variant='solid' onClick={handleBack}>
+                        Tilbage
+                    </Button>
+                    <Spacer/>
+                    <Button colorScheme="green" type="submit">
+                        Godkend
+                    </Button>
+                </HStack>
+            </form>
+        </Box>
+    </Box>
   )
 }
 
