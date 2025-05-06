@@ -24,7 +24,7 @@ const PublicBooking = () => {
 
     const createMutation = useCreateMutation<BookingRequest>({ endpoint: `booking`, method: "POST", onSuccess: async() => {
         console.log("Booking is created")
-      } });
+    } });
 
 
     useEffect(() => {
@@ -37,7 +37,7 @@ const PublicBooking = () => {
 
     const company = companyQuery.data;
 
-    const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const handleSelectServiceChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const selectedId = parseInt(e.target.value, 10);
         setSelectedServiceId(selectedId);
       
@@ -99,7 +99,7 @@ const PublicBooking = () => {
                 <Spacer/>
                 <Select
                     value={String(selectedServiceId)}
-                    onChange={handleChange}
+                    onChange={handleSelectServiceChange}
                     maxW="200px"
                     mb={5}
                     isDisabled={selectedTime?.isSelected}
