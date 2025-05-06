@@ -51,13 +51,13 @@ const BookingTable = ({TimeSlots, selectedDate, setSelectedDate, onSelectedTime}
           aria-label='Previous'
           icon={<GrPrevious/>}
           onClick={handlePrevDay}
-          isDisabled={selectedDate.isSame(today, "day")}
+          isDisabled={selected.isSame(today, "day")}
         />
         <Spacer />
         <Input
           fontWeight={600}
           type="date"
-          value={selectedDate.format("YYYY-MM-DD")}
+          value={selected.format("YYYY-MM-DD")}
           onChange={handleDateChange}
           min={dayjs().format("YYYY-MM-DD")}
           gap={2}
@@ -87,13 +87,21 @@ const BookingTable = ({TimeSlots, selectedDate, setSelectedDate, onSelectedTime}
       </Grid>
       {selectedTime && (
         <Text mt={4} fontWeight="medium">
+          Valgt dato: {selected.format("DD-MM-YYYY")}
+          <br />
           Valgt tid: {selectedTime}
         </Text>
       )}
+      <Button
+        mt={2}
+        onClick={onBookClick}
+        isDisabled={!selectedTime}
+        colorScheme="green"
+      >
+        Book tid
+      </Button>
     </Box>
-    </Box>
-  )
-}
+  );
+};
 
 export default BookingTable
-//{time.isAvailable ? "none" : "grey"}

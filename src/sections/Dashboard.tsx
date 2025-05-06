@@ -3,10 +3,12 @@ import { Routes, Route } from "react-router-dom";
 import { Bookings, Staff, Companies, CreateCompany, Services, Settings} from "../pages";
 import MobileSidebar from "./MobileSidebar";
 import DesktopSidebar from "./DesktopSidebar";
+import { RoleGuard } from "../auth/RoleGuard";
 
 const Dashboard = () => {
   return (
     <>
+    <RoleGuard allowedRoles={["company_admin", "admin", "company_staff"]}>
     <Hide above="lg">
       <MobileSidebar/>
     </Hide>
@@ -26,6 +28,7 @@ const Dashboard = () => {
         </Routes>
       </Box>
     </Flex>
+    </RoleGuard>
     </>
   )
 }

@@ -1,5 +1,6 @@
 import { Button, Card, CardBody, CardFooter, CardHeader, Heading, Text } from "@chakra-ui/react";
 import Service from "../types/Service";
+import { RoleGuard } from "../auth/RoleGuard";
 
 interface ServiceCardProps {
     id: number | null,
@@ -25,7 +26,9 @@ const ServiceCard = ({id, name, description, price, durationMinutes, onOpen}:Ser
             {durationMinutes ? <Text>Varighed: {durationMinutes} min.</Text>: null}
         </CardBody>
         <CardFooter>
-            <Button colorScheme='blue' onClick={handleOnOpen}>Redigere</Button>
+            <RoleGuard allowedRoles={["company_admin"]}>
+                <Button colorScheme='blue' onClick={handleOnOpen}>Redigere</Button>
+            </RoleGuard>
         </CardFooter>
     </Card>
 
