@@ -1,5 +1,6 @@
 import { Button, Card, CardBody, CardFooter, CardHeader, Heading, Text } from "@chakra-ui/react";
 import Staff from "../types/Staff";
+import { RoleGuard } from "../auth/RoleGuard";
 interface staffCardProps {
     id: number | null,
     name: string | null,
@@ -22,7 +23,9 @@ const StaffCard = ({id, name, email, phone, onOpen}:staffCardProps) => {
             {phone ? <Text>Tlf: {phone}</Text>: null}
         </CardBody>
         <CardFooter>
-            <Button colorScheme='blue' onClick={handleOnOpen}>Redigere</Button>
+            <RoleGuard allowedRoles={["company_admin"]}>
+                <Button colorScheme='blue' onClick={handleOnOpen}>Redigere</Button>
+            </RoleGuard>
         </CardFooter>
     </Card>
 

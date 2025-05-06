@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Navigate } from 'react-router-dom';
 import React from 'react';
 import Cookies from "js-cookie";
@@ -9,52 +10,62 @@ interface RoleGuardProps {
     children: React.ReactNode;
   }
 
-  interface NoRoleProps {
-    children: React.ReactNode;
-  }
-  
   export const RoleGuard: React.FC<RoleGuardProps> = ({ allowedRoles, children }) => {
     const role = Cookies.get("role");
 
     if (!role || !allowedRoles.includes(role)) {
-      return null; // Role not allowed; Don't render children
+      return null ; 
     }
   
     return <>{children}</>;
-  };
+  }; 
 
   export const RoleProtectedRoute: React.FC<RoleGuardProps> = ({ allowedRoles, children }) => {
     const role = Cookies.get("role");
 
     if (!role || !allowedRoles.includes(role)) {
-      if (role === "company_admin") {
-        return <Navigate to="/dashboard/bookings" />
-      }
-      return <Navigate to="/" /> // Redirect back to home if role is not allowed
+      return <Navigate to="/login" /> 
     }
-  
+
+    if (role === "company_admin" || role === "company_staff") {
+      return <Navigate to="/dashboard/bookings" />
+    }
+    if (role === "admin") {
+      return <Navigate to="/dashboard/companies" />
+    }
+    
     return <>{children}</>;
   };
 
-  export const NoRole: React.FC<NoRoleProps> = ({ children }) => {
-    const role = Cookies.get("role");
-
-    if (role) {
-      return null; // User already has a role; Don't render children
-    }
+  interface RoleProtectedElementProps {
+    allowedRoles: string[];
+    children: React.ReactElement;
+    fallback?: React.ReactElement; 
+  }
   
-    return <>{children}</>;
-  };
-
-  export const NoRoleProtectedRoute: React.FC<NoRoleProps> = ({ children }) => {
+  export const RoleProtectedElement: React.FC<RoleProtectedElementProps> = ({ allowedRoles, children, fallback = null }) => {
     const role = Cookies.get("role");
   
-    if (role) {
-      if (role === "company_admin") {
-        return <Navigate to="/dashboard/bookings" />
+    const isAllowed = role && allowedRoles.includes(role);
+  
+    if (!isAllowed) {
+      if (React.isValidElement(children)) {
+        const type = (children.type as any)?.displayName || children.type;
+  
+        const props: any = {};
+        if (type === "Button" || type === "button" || type === "Select" || type === "select") {
+          props.isDisabled = true;
+        } else if (type === "Input" || type === "input") {
+          props.isReadOnly = true;
+        } else {
+          return fallback;
+        }
+  
+        return React.cloneElement(children, props);
       }
-      return <Navigate to="/" />;
+  
+      return fallback;
     }
   
-    return <>{children}</>;
+    return children;
   };
