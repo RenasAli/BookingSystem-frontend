@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useCreateMutation } from "../hooks/useCreateMutation";
 import { useQueryClient } from "@tanstack/react-query";
 import StaffModal from "../components/StaffModal";
+import { RoleGuard } from "../auth/RoleGuard";
 
 const Staff = () => {
   const queryClient = useQueryClient();
@@ -53,22 +54,26 @@ const Staff = () => {
 
   return (
     <>
-    <Button colorScheme="green" mr={3} onClick={onOpen}>
-      Opret Medarbejder
-    </Button>
+    <RoleGuard allowedRoles={["company_admin"]}>
+      <Button colorScheme="green" mr={3} onClick={onOpen}>
+        Opret Medarbejder
+      </Button>
+    </RoleGuard>
     <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
         {staffQuery?.data?.map((staff: Staffs, index: number) => {
           return <StaffCard key= {index} id={staff.id} name={staff.name} email={staff.email} phone={staff.phone} onOpen={handleOnOpenEditModal}/>;
         })}
     </SimpleGrid>
-    <StaffModal
-      isOpen={isOpen}
-      onClose={onClose}
-      staff={staff}
-      onChange={updateStaffField}
-      onSubmit={handleSubmit}
-      isEditing={!!staff?.id}
-    />
+    <RoleGuard allowedRoles={["company_admin"]}>
+      <StaffModal
+        isOpen={isOpen}
+        onClose={onClose}
+        staff={staff}
+        onChange={updateStaffField}
+        onSubmit={handleSubmit}
+        isEditing={!!staff?.id}
+      />
+    </RoleGuard>
     </>
   )
 }
