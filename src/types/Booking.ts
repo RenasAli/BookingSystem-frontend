@@ -11,4 +11,5 @@ export default interface Booking {
     startTime: string;
     endTime: string;
     createdAt?: string; 
+    staffName?: string;
 }

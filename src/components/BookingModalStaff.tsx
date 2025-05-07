@@ -57,7 +57,7 @@ import {
   
             <Box mb={2}>
               <Text fontWeight="bold">Frisør:</Text>
-              <Text>{booking.staffId}</Text>
+              <Text>{booking.staffName}</Text>
             </Box>
           </ModalBody>
   
