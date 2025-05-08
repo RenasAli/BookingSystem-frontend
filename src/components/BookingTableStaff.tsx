@@ -3,6 +3,7 @@ import useBookingsByDate from "../hooks/useBookingByDate";
 import Booking from "../types/Booking";
 import { useState } from "react";
 import BookingModalStaff from "./BookingModalStaff";
+import BookingModal from "./BookingModal";
 import { GrNext, GrPrevious } from "react-icons/gr";
 import dayjs from "dayjs";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
@@ -24,8 +25,10 @@ const BookingTableStaff = () => {
   const { data: bookings, isLoading } = useBookingsByDate(selectedDate.format("YYYY-MM-DD"));
   const times = generateTimes();
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen: isViewOpen, onOpen: onViewOpen, onClose: onViewClose } = useDisclosure();
+  const { isOpen: isCreateOpen, onOpen: onCreateOpen, onClose: onCreateClose } = useDisclosure();
   const [selectedBooking, setSelectedBooking] = useState<Booking | null>(null);
+  const [newBooking, setNewBooking] = useState<Booking | null>(null);
 
   const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const date = dayjs(e.target.value);
@@ -46,7 +49,23 @@ const BookingTableStaff = () => {
 
   const openBookingModal = (booking: Booking) => {
     setSelectedBooking(booking);
-    onOpen();
+    onViewOpen();
+  };
+
+  const handleCreateBooking = () => {
+    const defaultBooking: Booking = {
+      id: null,
+      companyId: 1,
+      staffId: 1,
+      customerName: "",
+      customerPhone: "",
+      status: "pending",
+      startTime: selectedDate.format("YYYY-MM-DDT09:00:00Z"),
+      endTime: selectedDate.format("YYYY-MM-DDT09:45:00Z"),
+      createdAt: undefined,
+    };
+    setNewBooking(defaultBooking);
+    onCreateOpen();
   };
 
   return (
@@ -80,6 +99,9 @@ const BookingTableStaff = () => {
       onClick={handleNextDay}
     />
   </Flex>
+  <Button colorScheme="green" size={"sm"} mb={4} onClick={handleCreateBooking}>
+    Create Booking
+  </Button>
 
   {/* Content Table */}
   {isLoading ? (
@@ -120,7 +142,7 @@ const BookingTableStaff = () => {
                     onClick={() => openBookingModal(booking)}
                     size="sm"
                     colorScheme="blue"
-                    m={1} // Add margin between buttons
+                    m={1}
                   >
                     {start.format("HH:mm")} - {end.format("HH:mm")}
                   </Button>
@@ -134,8 +156,16 @@ const BookingTableStaff = () => {
   )}
 
   {selectedBooking && (
-    <BookingModalStaff isOpen={isOpen} onClose={onClose} booking={selectedBooking} />
+    <BookingModalStaff isOpen={isViewOpen} onClose={onViewClose} booking={selectedBooking} />
   )}
+      {newBooking && (
+        <BookingModal
+          isOpen={isCreateOpen}
+          onClose={onCreateClose}
+          booking={newBooking}
+          setBooking={setNewBooking}
+        />
+      )}
 </Box>
   );
 };
