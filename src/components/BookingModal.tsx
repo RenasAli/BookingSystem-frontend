@@ -12,7 +12,7 @@ import {
   Input,
 } from "@chakra-ui/react";
 import {  FormEvent } from "react";
-import Booking, { Status } from "../types/Booking";
+import Booking from "../types/Booking";
 
 interface BookingModalProps {
   isOpen: boolean;
