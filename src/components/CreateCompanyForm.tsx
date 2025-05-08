@@ -150,6 +150,13 @@ import {
                       />
                     </FormControl>
                     <FormControl isRequired>
+                      <FormLabel>Ejers Navn</FormLabel>
+                      <Input
+                        type="name"
+                        onChange={(e) => onChange("adminName", e.target.value)}
+                      />
+                    </FormControl>
+                    <FormControl isRequired>
                       <FormLabel>Ejers Password</FormLabel>
                       <Input
                         autoComplete="new-password"
