@@ -1,7 +1,7 @@
 import { Text, HStack, Container, Box, Spacer, Select } from "@chakra-ui/react";
 import BookingTable from "../components/BookingTable";
 import { useCompanyByUrl } from "../hooks/useCompany";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import useTimeSlot from "../hooks/useTimeSlot";
 import dayjs from "../utils/dayjs";
@@ -11,9 +11,12 @@ import SelectedTimeSlot from "../types/SelectedTimeSlot";
 import PublicBookingFooter from "../components/PublicBookingFooter";
 import PublicBookingHeader from "../components/PublicBookingHeader";
 import CreateBookingForm from "../components/CreateBookingForm";
+import BookingFeedbackModal from "../components/BookingFeedbackModal";
 
 const PublicBooking = () => {
-    const {companyUrl} = useParams()
+    const {companyUrl} = useParams();
+    const [searchParams] = useSearchParams();
+    const status = searchParams.get("status");
     const companyQuery = useCompanyByUrl(companyUrl?? null);
     const [selectedServiceId, setSelectedServiceId] = useState<number | null>(null);
     const [durationMinutes, setDurationMinutes] = useState<number>();
@@ -85,7 +88,8 @@ const PublicBooking = () => {
         setBookingField("startTime", mergeDateAndTime(selectedDate, selectedTime?.startTime ?? ""))
         setBookingField("endTime", mergeDateAndTime(selectedDate, selectedTime?.endTime ?? ""))
         if(booking) {
-          createMutation.mutate(booking);
+          const response = await createMutation.mutateAsync(booking);
+          window.location.href = response.data
         }
     };
 
@@ -128,7 +132,7 @@ const PublicBooking = () => {
             />}
         </Box>
     </Container>
-
+    {status && (status === "success" || status === "cancel") ? <BookingFeedbackModal status={status}/>: "" }
     <PublicBookingFooter company={company}/>
     </>
   )
