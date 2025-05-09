@@ -94,7 +94,7 @@ import {
       <Modal isOpen={isOpen} onClose={handleClose} size="md">
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Booking Details</ModalHeader>
+          <ModalHeader>Booking Info</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             {isStaffLoading ? (
@@ -102,7 +102,7 @@ import {
             ) : isEditing ? (
               <>
                 <FormControl mb={4}>
-                  <FormLabel>Date</FormLabel>
+                  <FormLabel>Dato</FormLabel>
                   <Input
                     name="startTime_date"
                     type="date"
@@ -112,7 +112,7 @@ import {
                   />
                 </FormControl>
                 <FormControl mb={4}>
-                  <FormLabel>Start Time</FormLabel>
+                  <FormLabel>Start</FormLabel>
                   <Input
                     name="startTime_time"
                     type="time"
@@ -122,7 +122,7 @@ import {
                   />
                 </FormControl>
                 <FormControl mb={4}>
-                  <FormLabel>End Time</FormLabel>
+                  <FormLabel>Slut</FormLabel>
                   <Input
                     name="endTime_time"
                     type="time"
@@ -135,29 +135,29 @@ import {
             ) : (
               <>
                 <Box mb={2}>
-                  <Text fontWeight="bold">Name:</Text>
+                  <Text fontWeight="bold">Navn:</Text>
                   <Text>{booking.customerName}</Text>
                 </Box>
   
                 <Box mb={2}>
-                  <Text fontWeight="bold">Phone:</Text>
+                  <Text fontWeight="bold">Telefon nr:</Text>
                   <Text>{booking.customerPhone}</Text>
                 </Box>
   
                 <Box mb={2}>
-                  <Text fontWeight="bold">Date:</Text>
+                  <Text fontWeight="bold">Dato:</Text>
                   <Text>{dayjs(booking.startTime).format("DD-MM-YYYY")}</Text>
                 </Box>
   
                 <Box mb={2}>
-                  <Text fontWeight="bold">Time:</Text>
+                  <Text fontWeight="bold">Tid:</Text>
                   <Text>
                     {dayjs(booking.startTime).format("HH:mm")} - {dayjs(booking.endTime).format("HH:mm")}
                   </Text>
                 </Box>
   
                 <Box mb={2}>
-                  <Text fontWeight="bold">Staff:</Text>
+                  <Text fontWeight="bold">Frisør:</Text>
                   <Text>{staff?.name || "Unknown"}</Text>
                 </Box>
               </>
@@ -166,11 +166,11 @@ import {
           <ModalFooter>
             {isEditing ? (
               <Button colorScheme="blue" onClick={handleUpdate} mr={3}>
-                Save
+                Gem
               </Button>
             ) : (
               <Button colorScheme="blue" onClick={() => setIsEditing(true)} mr={3}>
-                Update
+                Opdater
               </Button>
             )}
             <Button variant="ghost" onClick={handleClose}>

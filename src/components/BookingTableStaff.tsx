@@ -100,7 +100,7 @@ const BookingTableStaff = () => {
     />
   </Flex>
   <Button colorScheme="green" size={"sm"} mb={4} onClick={handleCreateBooking}>
-    Create Booking
+    Opret Booking
   </Button>
 
   {/* Content Table */}
@@ -111,10 +111,10 @@ const BookingTableStaff = () => {
       <Thead>
   <Tr>
     {/* Time column header */}
-    <Th width="80px">Time</Th>
+    <Th width="80px">Tid</Th>
 
     {/* Booked column header */}
-    <Th textAlign="center">Booked</Th>
+    <Th textAlign="center">Booket</Th>
   </Tr>
   </Thead>
     <Tbody>

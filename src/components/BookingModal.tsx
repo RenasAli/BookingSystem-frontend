@@ -1,4 +1,3 @@
-
 import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
 import { useState } from "react";
 import { useCreateMutation } from "../hooks/useCreateMutation";
@@ -55,19 +54,19 @@ const BookingModal = ({ isOpen, onClose, booking, setBooking }: BookingModalProp
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Create Booking</ModalHeader>
+        <ModalHeader>Opret Booking</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <FormControl mb={4}>
-            <FormLabel>Customer Name</FormLabel>
+            <FormLabel>Kunde Navn</FormLabel>
             <Input name="customerName" value={booking.customerName} onChange={handleInputChange} />
           </FormControl>
           <FormControl mb={4}>
-            <FormLabel>Customer Phone</FormLabel>
+            <FormLabel>Kunde Telefon</FormLabel>
             <Input name="customerPhone" value={booking.customerPhone} onChange={handleInputChange} />
           </FormControl>
           <FormControl mb={4}>
-            <FormLabel>Date</FormLabel>
+            <FormLabel>Dato</FormLabel>
             <Input
               name="startDate"
               type="date"
@@ -81,7 +80,7 @@ const BookingModal = ({ isOpen, onClose, booking, setBooking }: BookingModalProp
             />
           </FormControl>
           <FormControl mb={4}>
-            <FormLabel>Start Time</FormLabel>
+            <FormLabel>Start</FormLabel>
             <Input
               name="startTime"
               type="time"
@@ -95,7 +94,7 @@ const BookingModal = ({ isOpen, onClose, booking, setBooking }: BookingModalProp
             />
           </FormControl>
           <FormControl mb={4}>
-            <FormLabel>End Time</FormLabel>
+            <FormLabel>Slut</FormLabel>
             <Input
               name="endTime"
               type="time"
@@ -111,10 +110,10 @@ const BookingModal = ({ isOpen, onClose, booking, setBooking }: BookingModalProp
         </ModalBody>
         <ModalFooter>
           <Button variant="ghost" onClick={onClose} isDisabled={isSubmitting}>
-            Cancel
+            Annuller
           </Button>
           <Button colorScheme="blue" onClick={handleSubmit} isLoading={isSubmitting}>
-            Submit
+            Bekræft
           </Button>
         </ModalFooter>
       </ModalContent>
