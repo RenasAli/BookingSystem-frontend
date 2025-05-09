@@ -6,7 +6,7 @@ export default interface Staff {
     staffWorkdays: Array<staffWorkdays>
 }
 
-interface staffWorkdays {
+export interface staffWorkdays {
     weekdayId: number,
     isActive: boolean,
     startTime: string | null,
