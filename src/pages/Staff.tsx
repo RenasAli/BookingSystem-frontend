@@ -37,8 +37,32 @@ const Staff = () => {
     setStaff(staff)
   }
 
-  const updateStaffField = (field: keyof Staffs, value: string) => {
-    setStaff((prev) => ({ ...prev, [field]: value } as Staffs));
+  const updateStaffField = (field: keyof Staffs, value: unknown) => {
+    //setStaff((prev) => ({ ...prev, [field]: value } as Staffs));
+    setStaff((prev) => {
+          if (!prev) return prev;
+      
+          const updatedStaff = { ...prev };
+      
+          switch (field) {
+            case "name":
+              updatedStaff.name = value as string;
+              break;
+            case "email":
+              updatedStaff.email = value as string;
+              break;
+            case "phone":
+              updatedStaff.phone = value as string;
+              break;
+            case "staffWorkdays":
+              updatedStaff.staffWorkdays = value as Staffs["staffWorkdays"];
+              break;
+            default:
+              console.warn(`Unhandled field in updateCompanyField: ${field}`);
+          }
+      
+          return updatedStaff;
+        });
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -55,13 +79,13 @@ const Staff = () => {
   return (
     <>
     <RoleGuard allowedRoles={["company_admin"]}>
-      <Button colorScheme="green" mr={3} onClick={onOpen}>
+      <Button colorScheme="green" mr={3} mb={5} onClick={onOpen}>
         Opret Medarbejder
       </Button>
     </RoleGuard>
     <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
         {staffQuery?.data?.map((staff: Staffs, index: number) => {
-          return <StaffCard key= {index} id={staff.id} name={staff.name} email={staff.email} phone={staff.phone} onOpen={handleOnOpenEditModal}/>;
+          return <StaffCard key= {index} id={staff.id} name={staff.name} email={staff.email} phone={staff.phone} staffWorkdays={staff.staffWorkdays} onOpen={handleOnOpenEditModal}/>;
         })}
     </SimpleGrid>
     <RoleGuard allowedRoles={["company_admin"]}>

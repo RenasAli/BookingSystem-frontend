@@ -10,6 +10,12 @@ import {
     FormControl,
     FormLabel,
     Input,
+    Box,
+    Heading,
+    SimpleGrid,
+    VStack,
+    HStack,
+    Checkbox,
   } from "@chakra-ui/react";
   import {  FormEvent } from "react";
 import Staff from "../types/Staff";
@@ -18,7 +24,7 @@ import Staff from "../types/Staff";
     isOpen: boolean;
     onClose: () => void;
     staff: Staff | undefined;
-    onChange: (field: keyof Staff, value: string) => void;
+    onChange: (field: keyof Staff, value: unknown) => void;
     onSubmit: (e: FormEvent<HTMLFormElement>) => void;
     isEditing?: boolean;
   }
@@ -31,6 +37,20 @@ import Staff from "../types/Staff";
     onSubmit,
     isEditing = true,
   }: StaffModalProps) => {
+    const handleWorkdayChange = (
+      index: number,
+      field: "isActive" | "startTime" | "endTime",
+      value: string | boolean
+    ) => {
+      if (!staff) return;
+      const updated = [...staff.staffWorkdays];
+      updated[index] = {
+        ...updated[index],
+        [field]: value,
+      };
+    
+      onChange("staffWorkdays", updated);
+    };
     return (
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
@@ -59,6 +79,58 @@ import Staff from "../types/Staff";
                   onChange={(e) => onChange("phone", e.target.value)}
                 />
               </FormControl>
+              <Box
+                mb={5}
+                mt={5}
+                p={4}
+                borderWidth="1px"
+                borderRadius="md"
+              >
+                <Heading fontSize="lg" mb={4}>Arbejdstider</Heading>
+                <SimpleGrid columns={1} spacing={8} >
+                  {staff?.staffWorkdays.map((day, index) => (
+                    <Box
+                      key={day.weekdayId}
+                      p={4}
+                      borderWidth="1px"
+                      borderRadius="md"
+                      >
+                        
+                          <VStack spacing={2} >
+                            <HStack>
+                              <FormLabel>{["Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag", "Søndag"][day.weekdayId - 1]}</FormLabel>
+                              <Checkbox
+                                isChecked={day?.isActive}
+                                onChange={(e) => handleWorkdayChange(index, "isActive", e.target.checked)}
+                              />
+                            </HStack>
+                            <HStack>
+                              <FormLabel fontSize="sm">Starter</FormLabel>
+                              <FormControl>
+                                  <Input
+                                    type="time"
+                                    value={day.startTime || ""}
+                                    onChange={(e) => handleWorkdayChange(index, "startTime", e.target.value)}
+                                    isDisabled={!day.isActive}
+                                  />
+                              </FormControl>
+                            </HStack>
+                            <HStack>
+                              <FormLabel fontSize="sm">Slutter</FormLabel>
+                              <FormControl>
+                                <Input
+                                  type="time"
+                                  value={day.endTime || ""}
+                                  onChange={(e) => handleWorkdayChange(index, "endTime", e.target.value)}
+                                  isDisabled={!day.isActive}
+                                />
+                              </FormControl>
+                            </HStack>
+                          </VStack>
+                    </Box>
+                  ))}
+                </SimpleGrid>
+              </Box>
             </ModalBody>
             <ModalFooter>
               <Button colorScheme="red" mr={3} onClick={onClose}>

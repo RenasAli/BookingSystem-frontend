@@ -4,5 +4,6 @@ export {default as Staff} from './Staff.tsx';
 export {default as Companies} from './Companies.tsx';
 export {default as Services} from './Services.tsx';
 export {default as Settings} from './Settings.tsx';
+export {default as Profile} from './Profile.tsx';
 export {default as CreateCompany} from './CreateCompany.tsx';
 export {default as PublicBooking} from './PublicBooking.tsx';
