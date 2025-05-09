@@ -25,6 +25,7 @@ export default interface Company {
     confirmationMethod: string;
     companyEmail: string;
     adminEmail: string;
+    adminName:string;
     adminPassword: string;
     companyName: string;
     companyPhone: string;

@@ -25,6 +25,7 @@ const CreateCompany = () => {
         confirmationMethod: "",
         companyEmail: "",
         adminEmail: "",
+        adminName: "",
         adminPassword: "",
         companyName: "",
         companyPhone: "",
