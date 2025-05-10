@@ -10,7 +10,6 @@ import { RoleGuard } from "../auth/RoleGuard";
 
 const Staff = () => {
   const queryClient = useQueryClient();
-
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [staff, setStaff] = useState<Staffs>();
   const staffQuery = useStaff();
@@ -30,7 +29,9 @@ const Staff = () => {
     
   if (staffQuery.isError) {
     return <div>Error loading...</div>;
-  }   
+  }
+
+  const staffData = staffQuery.data ?? [];
 
   const handleOnOpenEditModal = (staff: Staffs) => {
     onOpen();
@@ -84,7 +85,7 @@ const Staff = () => {
       </Button>
     </RoleGuard>
     <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
-        {staffQuery?.data?.map((staff: Staffs, index: number) => {
+        {staffData.map((staff: Staffs, index: number) => {
           return <StaffCard key= {index} id={staff.id} name={staff.name} email={staff.email} phone={staff.phone} staffWorkdays={staff.staffWorkdays} onOpen={handleOnOpenEditModal}/>;
         })}
     </SimpleGrid>

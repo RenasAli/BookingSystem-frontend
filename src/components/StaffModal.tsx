@@ -88,7 +88,7 @@ import Staff from "../types/Staff";
               >
                 <Heading fontSize="lg" mb={4}>Arbejdstider</Heading>
                 <SimpleGrid columns={1} spacing={8} >
-                  {staff?.staffWorkdays.map((day, index) => (
+                  {staff?.staffWorkdays?.map((day, index) => (
                     <Box
                       key={day.weekdayId}
                       p={4}
