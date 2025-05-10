@@ -49,7 +49,7 @@ const SidebarContent = ({onClose}: sidebarContentProps ) => {
           </Button>
         </RoleGuard>
         <RoleGuard allowedRoles={["company_staff"]}>
-          <Button onClick={onClose} as={Link} to="/dashboard/profile" variant={isActive("/dashboard/settings") ? "selected_nav" : "nav"}>
+          <Button onClick={onClose} as={Link} to="/dashboard/profile" variant={isActive("/dashboard/profile") ? "selected_nav" : "nav"}>
               Profil
           </Button>
         </RoleGuard>
