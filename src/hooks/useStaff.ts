@@ -21,7 +21,7 @@ export const useStaffById = () => {
   const apiClient = new ApiClient<Staff, SingleStaffResponse>(`/staff/get/profile`);
 
     const staffQuery = useQuery<Staff, Error>({
-        queryKey: ['staff'],
+        queryKey: ['profile'],
         queryFn: () => {
           return  apiClient.get();
         },
