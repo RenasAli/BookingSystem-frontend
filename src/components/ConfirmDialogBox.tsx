@@ -41,10 +41,10 @@ import {
                 {description}
                 </ModalBody>
                 <ModalFooter>
-                    <Button colorScheme="red" mr={3} onClick={handleConfirmClick} isLoading={confirmIsLoading}>
+                    <Button variant="cancel" mr={3} onClick={handleConfirmClick} isLoading={confirmIsLoading}>
                     {confirmButtonText}
                     </Button>
-                    <Button colorScheme="blue" mr={3} onClick={onClose}>
+                    <Button variant="primary" mr={3} onClick={onClose}>
                     {closeButtonText}
                     </Button>
                 </ModalFooter>

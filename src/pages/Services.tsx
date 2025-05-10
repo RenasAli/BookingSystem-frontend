@@ -53,7 +53,7 @@ const Services = () => {
   return (
     <>
     <RoleGuard allowedRoles={["company_admin"]}>
-      <Button colorScheme="green" mr={3} mb={5} onClick={onOpen}>
+      <Button variant="success" mr={3} mb={5} onClick={onOpen}>
         Opret Service
       </Button>
     </RoleGuard>

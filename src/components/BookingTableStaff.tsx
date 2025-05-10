@@ -7,6 +7,8 @@ import BookingModal from "./BookingModal";
 import { GrNext, GrPrevious } from "react-icons/gr";
 import dayjs from "dayjs";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
+import { LuCalendarPlus } from "react-icons/lu";
+
 dayjs.extend(isSameOrAfter);
 
 const generateTimes = (start = 9, end = 18) => {
@@ -99,7 +101,7 @@ const BookingTableStaff = () => {
       onClick={handleNextDay}
     />
   </Flex>
-  <Button colorScheme="green" size={"sm"} mb={4} onClick={handleCreateBooking}>
+  <Button variant="success" leftIcon={<LuCalendarPlus/>} size={"sm"} mb={4} onClick={handleCreateBooking}>
     Opret Booking
   </Button>
 
@@ -141,7 +143,7 @@ const BookingTableStaff = () => {
                     key={booking.id}
                     onClick={() => openBookingModal(booking)}
                     size="sm"
-                    colorScheme="blue"
+                    variant="primary"
                     m={1}
                   >
                     {start.format("HH:mm")} - {end.format("HH:mm")}

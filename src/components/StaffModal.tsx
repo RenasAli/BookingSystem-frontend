@@ -133,10 +133,10 @@ import Staff from "../types/Staff";
               </Box>
             </ModalBody>
             <ModalFooter>
-              <Button colorScheme="red" mr={3} onClick={onClose}>
+              <Button variant="cancel" mr={3} onClick={onClose}>
                 Luk
               </Button>
-              <Button colorScheme="green" type="submit">
+              <Button variant={isEditing ? "primary" : "success"} type="submit">
                 {isEditing ? "Gem" : "Opret"}
               </Button>
             </ModalFooter>

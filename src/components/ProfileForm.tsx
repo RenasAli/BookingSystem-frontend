@@ -67,7 +67,7 @@ const ProfileForm = ({staff}: ProfileFormProps) => {
                         />
                     </FormControl> 
                 </SimpleGrid>
-                <Button colorScheme="green" backgroundColor="#34d399" type="submit" mt={5}>
+                <Button variant="primary" type="submit" mt={5}>
                     Gem
                 </Button>
             </Box>
