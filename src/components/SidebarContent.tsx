@@ -1,5 +1,5 @@
-import { Button, Flex, useToast, VStack } from "@chakra-ui/react";
-import { Link, useNavigate } from "react-router-dom";
+import { Box, Button, Flex, Heading, useToast, VStack } from "@chakra-ui/react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { SlLogout } from "react-icons/sl";
 import { handleLogout } from "../auth/handleLogout";
 import Cookies from "js-cookie";
@@ -10,7 +10,8 @@ interface sidebarContentProps {
   onClose: () => void;
 }
 const SidebarContent = ({onClose}: sidebarContentProps ) => {
-  
+  const location = useLocation();
+  const isActive = (path: string) => location.pathname.startsWith(path);  
   const toast = useToast();
   const navigate = useNavigate();
 
@@ -21,32 +22,38 @@ const SidebarContent = ({onClose}: sidebarContentProps ) => {
   
 
   return (
-    <Flex direction="column" height="100vh" p={6} justify="space-between">
-      <VStack align="flex-start" spacing={4}>
+    <Flex direction="column" height="100vh"  justify="space-between" bgColor="#579AFF">
+      <VStack align="flex-start" >
+        <Box boxShadow="md" w="full">
+        <Heading size="lg" color="white" m={2} >Dashboard</Heading>
+        </Box>
         <RoleGuard allowedRoles={["admin"]}>
-          <Button onClick={onClose} as={Link} to="/dashboard/companies" variant="ghost" w="full" justifyContent="flex-start">
+          <Button onClick={onClose} as={Link} to="/dashboard/companies" variant={isActive("/dashboard/companies") ? "selected_nav" : "nav"}  >
             Virksomheder
           </Button>
         </RoleGuard>
         <RoleGuard allowedRoles={["company_admin", "company_staff"]}>
-          <Button onClick={onClose} as={Link} to="/dashboard/bookings" variant="ghost" w="full" justifyContent="flex-start">
+          <Button onClick={onClose}  as={Link} to="/dashboard/bookings" variant={isActive("/dashboard/bookings") ? "selected_nav" : "nav"}  >
             Kalender
           </Button>
-          <Button onClick={onClose} as={Link} to="/dashboard/staff" variant="ghost" w="full" justifyContent="flex-start">
+          <Button onClick={onClose} as={Link} to="/dashboard/staff" variant={isActive("/dashboard/staff") ? "selected_nav" : "nav"} >
             Medarbejder
           </Button>
-          <Button onClick={onClose} as={Link} to="/dashboard/services" variant="ghost" w="full" justifyContent="flex-start">
+          <Button onClick={onClose} as={Link} to="/dashboard/services" variant={isActive("/dashboard/services") ? "selected_nav" : "nav"}>
             Services
           </Button>
         </RoleGuard>
         <RoleGuard allowedRoles={["company_admin"]}>
-          <Button onClick={onClose} as={Link} to="/dashboard/settings" variant="ghost" w="full" justifyContent="flex-start">
+          <Button onClick={onClose} as={Link} to="/dashboard/settings" variant={isActive("/dashboard/settings") ? "selected_nav" : "nav"}  >
             Indstillinger
           </Button>
         </RoleGuard>
         <RoleGuard allowedRoles={["company_staff"]}>
         <Button onClick={onClose} as={Link} to="/dashboard/profile" variant="ghost" w="full" justifyContent="flex-start">
             Profil
+          <Button variant={isActive("/dashboard/profile") ? "selected_nav" : "nav"}>
+            Profile
+
           </Button>
         </RoleGuard>
       </VStack>
