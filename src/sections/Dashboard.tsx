@@ -1,6 +1,6 @@
 import { Box, Flex, Hide, Show } from "@chakra-ui/react";
 import { Routes, Route } from "react-router-dom";
-import { Bookings, Staff, Companies, CreateCompany, Services, Settings} from "../pages";
+import { Bookings, Staff, Companies, CreateCompany, Services, Settings, Profile} from "../pages";
 import MobileSidebar from "./MobileSidebar";
 import DesktopSidebar from "./DesktopSidebar";
 import { RoleGuard } from "../auth/RoleGuard";
@@ -24,6 +24,7 @@ const Dashboard = () => {
           <Route path="/companies/create-company" element={<CreateCompany />} />
           <Route path="/services" element={<Services />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/companies/settings" element={<Settings />} />
         </Routes>
       </Box>

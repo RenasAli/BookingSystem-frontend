@@ -49,8 +49,11 @@ const SidebarContent = ({onClose}: sidebarContentProps ) => {
           </Button>
         </RoleGuard>
         <RoleGuard allowedRoles={["company_staff"]}>
+        <Button onClick={onClose} as={Link} to="/dashboard/profile" variant="ghost" w="full" justifyContent="flex-start">
+            Profil
           <Button variant={isActive("/dashboard/profile") ? "selected_nav" : "nav"}>
             Profile
+
           </Button>
         </RoleGuard>
       </VStack>
