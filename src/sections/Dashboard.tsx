@@ -12,11 +12,11 @@ const Dashboard = () => {
     <Hide above="lg">
       <MobileSidebar/>
     </Hide>
-    <Flex>
+    <Flex h="100vh" overflow="hidden">
       <Show above="lg" >
         <DesktopSidebar/>
       </Show>
-      <Box flex="1" p="4">
+      <Box flex="1"  overflowY="auto" p={4}>
         <Routes>
           <Route path="/bookings" element={<Bookings />} />
           <Route path="/staff" element={<Staff />} />
