@@ -31,9 +31,13 @@ const Services = () => {
     return <div>Error loading...</div>;
   }
 
+  const handleOnOpenCreateModal = () => {
+    setservice(undefined);
+    onOpen();
+  }
   const handleOnOpenEditModal = (service: Service) => {
     onOpen();
-    setservice(service)
+    setservice(service);
   }
 
   const updateServiceField = (field: keyof Service, value: string) => {
@@ -53,7 +57,7 @@ const Services = () => {
   return (
     <>
     <RoleGuard allowedRoles={["company_admin"]}>
-      <Button variant="success" mr={3} mb={5} onClick={onOpen}>
+      <Button variant="success" mr={3} mb={5} onClick={handleOnOpenCreateModal}>
         Opret Service
       </Button>
     </RoleGuard>
