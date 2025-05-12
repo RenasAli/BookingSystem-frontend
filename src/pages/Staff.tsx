@@ -33,9 +33,13 @@ const Staff = () => {
 
   const staffData = staffQuery.data ?? [];
 
+  const handleOnOpenCreateModal = () => {
+    setStaff(undefined);
+    onOpen();
+  }
   const handleOnOpenEditModal = (staff: Staffs) => {
     onOpen();
-    setStaff(staff)
+    setStaff(staff);
   }
 
   const updateStaffField = (field: keyof Staffs, value: unknown) => {
@@ -80,7 +84,7 @@ const Staff = () => {
   return (
     <>
     <RoleGuard allowedRoles={["company_admin"]}>
-      <Button variant="success" mr={3} mb={5} onClick={onOpen}>
+      <Button variant="success" mr={3} mb={5} onClick={handleOnOpenCreateModal}>
         Opret Medarbejder
       </Button>
     </RoleGuard>
