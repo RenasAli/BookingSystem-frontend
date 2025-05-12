@@ -25,7 +25,7 @@ const StaffCard = ({id, name, email, phone, staffWorkdays, onOpen}:staffCardProp
         </CardBody>
         <CardFooter>
             <RoleGuard allowedRoles={["company_admin"]}>
-                <Button colorScheme='blue' onClick={handleOnOpen}>Redigere</Button>
+                <Button variant="primary" onClick={handleOnOpen}>Redigere</Button>
             </RoleGuard>
         </CardFooter>
     </Card>

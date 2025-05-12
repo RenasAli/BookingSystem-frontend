@@ -34,7 +34,28 @@ const theme = extendTheme({
           _hover: {
             bg: "#3674d1",
           }
-        }
+        },
+        success: {
+          bg: "#34d399",
+          color: "white",
+          _hover: {
+            bg: "#319973",
+          }
+        },
+        cancel: {
+          bg: "#f03141",
+          color: "white",
+          _hover: {
+            bg: "#cc1d2b",
+          }
+        },
+        primary: {
+          bg: "#579AFF",
+          color: "white",
+          _hover: {
+            bg: "#3674d1",
+          }
+        },
       },
     },
   }

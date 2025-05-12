@@ -112,7 +112,7 @@ const BookingModal = ({ isOpen, onClose, booking, setBooking }: BookingModalProp
           <Button variant="ghost" onClick={onClose} isDisabled={isSubmitting}>
             Annuller
           </Button>
-          <Button colorScheme="blue" onClick={handleSubmit} isLoading={isSubmitting}>
+          <Button variant="primary" onClick={handleSubmit} isLoading={isSubmitting}>
             Bekræft
           </Button>
         </ModalFooter>

@@ -24,6 +24,7 @@ import {
   import Company, { CompanyRequest } from "../types/Copmpany";
 import ConfirmDialogBox from "./ConfirmDialogBox";
 import { RoleGuard, RoleProtectedElement } from "../auth/RoleGuard";
+
   
   interface CompanyFormProps {
     company: Company | undefined;
@@ -281,14 +282,14 @@ import { RoleGuard, RoleProtectedElement } from "../auth/RoleGuard";
           <Stack direction="row" spacing={4} mr={3}  justify="flex-end">
             <RoleGuard allowedRoles={["admin"]}>
               <Button 
-                colorScheme="red"
+                variant="cancel"
                 isLoading={deleteIsPending}
                 onClick={onOpen}
               >
                 Slet Virksomheden
               </Button>
             </RoleGuard>
-            <Button colorScheme="green" type="submit">
+            <Button variant="success" type="submit">
               Gem
             </Button>
           </Stack>

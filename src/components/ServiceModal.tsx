@@ -68,7 +68,7 @@ import {
                         </ModalBody>
 
                         <ModalFooter>
-                            <Button colorScheme="blue" mr={3} type="submit">
+                            <Button variant={isEditing ? "primary" : "success"} mr={3} type="submit">
                                 {isEditing ? "Gem" : "Opret"}
                             </Button>
                             <Button variant="ghost" onClick={onClose}>
