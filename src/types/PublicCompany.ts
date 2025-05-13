@@ -8,6 +8,7 @@ export interface PublicCompany {
     phone: string;
     email: string;
     logo?: string;
+    confirmationMethod: string;
     address: Address;
     workday: Array<CompanyWorkday>
     services: Array<PublicService>
