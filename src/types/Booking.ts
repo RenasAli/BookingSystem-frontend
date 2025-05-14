@@ -2,7 +2,7 @@ export type Status = 'pending' | 'confirmed' | 'cancelled';
 
 export default interface Booking {
     id: number | null;
-    companyId: number;
+    companyId?: number;
     staffId: number;
     serviceId?: number;
     customerName: string;

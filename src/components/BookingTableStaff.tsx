@@ -57,7 +57,6 @@ const BookingTableStaff = () => {
   const handleCreateBooking = () => {
     const defaultBooking: Booking = {
       id: null,
-      companyId: 1,
       staffId: 1,
       customerName: "",
       customerPhone: "",
@@ -113,26 +112,32 @@ const BookingTableStaff = () => {
       <Thead>
   <Tr>
     {/* Time column header */}
-    <Th width="80px">Tid</Th>
+    <Th width="80px" borderRight="1px solid #E2E8F0">Tid</Th>
 
     {/* Booked column header */}
-    <Th textAlign="center">Booket</Th>
+    <Th textAlign="center" borderRight="1px solid #E2E8F0">Bekræftet</Th>
+    <Th textAlign="center" borderRight="1px solid #E2E8F0">Afventer</Th>
+    <Th textAlign="center">Aflyst</Th>
   </Tr>
   </Thead>
     <Tbody>
       {times.map((time) => (
         <Tr key={time}>
           {/* Time column */}
-          <Td>{time}</Td>
+          <Td borderRight="1px solid #E2E8F0">{time}</Td>
 
-          {/* Booked column */}
-          <Td>
+          {/* Confirmed bookings */}
+          <Td borderRight="1px solid #E2E8F0">
             {bookings
               ?.filter((booking) => {
                 const start = dayjs(booking.startTime);
                 const rowStart = dayjs(`${selectedDate.format("YYYY-MM-DD")} ${time}`);
                 const rowEnd = rowStart.add(1, "hour");
-                return start.isSameOrAfter(rowStart) && start.isBefore(rowEnd);
+                return (
+                  start.isSameOrAfter(rowStart) &&
+                  start.isBefore(rowEnd) &&
+                  booking.status === "confirmed"
+                );
               })
               .map((booking) => {
                 const start = dayjs(booking.startTime);
@@ -143,7 +148,82 @@ const BookingTableStaff = () => {
                     key={booking.id}
                     onClick={() => openBookingModal(booking)}
                     size="sm"
-                    variant="primary"
+                    colorScheme="blue"
+                    m={1}
+                  >
+                    {start.format("HH:mm")} - {end.format("HH:mm")}
+                  </Button>
+                );
+              })}
+          </Td>
+
+          {/* Pending bookings */}
+          <Td borderRight="1px solid #E2E8F0">
+            {bookings
+              ?.filter((booking) => {
+                const start = dayjs(booking.startTime);
+                const rowStart = dayjs(`${selectedDate.format("YYYY-MM-DD")} ${time}`);
+                const rowEnd = rowStart.add(1, "hour");
+                return (
+                  start.isSameOrAfter(rowStart) &&
+                  start.isBefore(rowEnd) &&
+                  booking.status === "pending"
+                );
+              })
+              .map((booking) => {
+                const start = dayjs(booking.startTime);
+                const end = dayjs(booking.endTime);
+
+                return (
+                  <Button
+                    key={booking.id}
+                    onClick={() => openBookingModal(booking)}
+                    size="sm"
+                    colorScheme="purple"
+                    m={1}
+                  >
+                    {start.format("HH:mm")} - {end.format("HH:mm")}
+                  </Button>
+                );
+              })}
+          </Td>
+
+          {/* Cancelled bookings */}
+          <Td>
+            {bookings
+              ?.filter((booking) => {
+                const start = dayjs(booking.startTime);
+                const rowStart = dayjs(`${selectedDate.format("YYYY-MM-DD")} ${time}`);
+                const rowEnd = rowStart.add(1, "hour");
+                return (
+                  start.isSameOrAfter(rowStart) &&
+                  start.isBefore(rowEnd) &&
+                  booking.status === "cancelled"
+                );
+              })
+              .map((booking) => {
+                const start = dayjs(booking.startTime);
+                const end = dayjs(booking.endTime);
+                
+                const getColorScheme = (status: string) => {
+                  switch (status) {
+                    case "confirmed":
+                      return "blue";
+                    case "pending":
+                      return "purple";
+                    case "cancelled":
+                      return "red";
+                    default:
+                      return "gray"; // Default color for unknown statuses
+                  }
+                };
+
+                return (
+                  <Button
+                    key={booking.id}
+                    onClick={() => openBookingModal(booking)}
+                    size="sm"
+                    colorScheme={getColorScheme(booking.status)}
                     m={1}
                   >
                     {start.format("HH:mm")} - {end.format("HH:mm")}
