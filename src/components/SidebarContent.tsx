@@ -10,6 +10,8 @@ import { IoIosPeople } from "react-icons/io";
 import { LuClipboardList } from "react-icons/lu";
 import { MdOutlineSettingsSuggest } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
+import { TbBeach } from "react-icons/tb";
+
 
 
 interface sidebarContentProps {
@@ -47,6 +49,9 @@ const SidebarContent = ({onClose}: sidebarContentProps ) => {
           </Button>
           <Button onClick={onClose} as={Link} to="/dashboard/services" variant={isActive("/dashboard/services") ? "selected_nav" : "nav"} leftIcon={<LuClipboardList/>}>
             Services
+          </Button>
+          <Button onClick={onClose} as={Link} to="/dashboard/off-day" variant={isActive("/dashboard/off-day") ? "selected_nav" : "nav"} leftIcon={<TbBeach/>}>
+            Ferie
           </Button>
         </RoleGuard>
         <RoleGuard allowedRoles={["company_admin"]}>

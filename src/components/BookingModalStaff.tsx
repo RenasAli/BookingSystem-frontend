@@ -39,16 +39,16 @@ import {
       onClose();
     };
   
-    if (!booking) return null;
+    
   
-    const staff = staffList?.find((s) => s.id === booking.staffId);
+    const staff = staffList?.find((s) => s.id === booking?.staffId);
   
     const updateMutation = useCreateMutation({
-      endpoint: `booking/${booking.id}`,
+      endpoint: `booking/${booking?.id}`,
       method: "PUT",
       onSuccess: async () => {
         console.log("Booking updated successfully!");
-        await queryClient.invalidateQueries({ queryKey: ["bookings", booking.id] });
+        await queryClient.invalidateQueries({ queryKey: ["bookings", booking?.id] });
         await queryClient.refetchQueries({ queryKey: ["bookings"] });
         setIsEditing(false);
         handleClose();
@@ -89,6 +89,7 @@ import {
         await updateMutation.mutateAsync(editableBooking);
       }
     };
+    if (!booking) return null;
   
     return (
       <Modal isOpen={isOpen} onClose={handleClose} size="md">

@@ -20,7 +20,7 @@ const Staff = () => {
   } });
   const createMutation = useCreateMutation<Staffs>({ endpoint: `staff`, method: "POST", onSuccess: async() => {
     await queryClient.invalidateQueries({
-        queryKey: ['staff', staff?.id]
+        queryKey: ['staff']
       })
   } });
   if (staffQuery.isLoading) {
