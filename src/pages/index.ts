@@ -7,3 +7,4 @@ export {default as Settings} from './Settings.tsx';
 export {default as Profile} from './Profile.tsx';
 export {default as CreateCompany} from './CreateCompany.tsx';
 export {default as PublicBooking} from './PublicBooking.tsx';
+export {default as OffDay} from './OffDay.tsx';

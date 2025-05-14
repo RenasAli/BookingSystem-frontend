@@ -20,7 +20,7 @@ const Services = () => {
   } });
   const createMutation = useCreateMutation<Service>({ endpoint: `service`, method: "POST", onSuccess: async() => {
     await queryClient.invalidateQueries({
-        queryKey: ['services', service?.id]
+        queryKey: ['services']
       })
   } });
   if (serviceQuery.isLoading) {
