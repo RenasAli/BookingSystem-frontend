@@ -12,7 +12,7 @@ const DesktopSidebar = () => {
           borderRight="1px solid"
           borderColor="gray.200"
       >
-          <SidebarContent onClose={()=>{}} />
+          <SidebarContent />
       </Box>
     </RoleGuard>
   )
