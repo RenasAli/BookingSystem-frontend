@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Heading, useToast, VStack } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Hide, HStack, IconButton, Spacer, useToast, VStack } from "@chakra-ui/react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { SlLogout } from "react-icons/sl";
 import { handleLogout } from "../auth/handleLogout";
@@ -11,11 +11,12 @@ import { LuClipboardList } from "react-icons/lu";
 import { MdOutlineSettingsSuggest } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { TbBeach } from "react-icons/tb";
+import { IoMdClose } from "react-icons/io";
 
 
 
 interface sidebarContentProps {
-  onClose: () => void;
+  onClose?: () => void;
 }
 const SidebarContent = ({onClose}: sidebarContentProps ) => {
   const location = useLocation();
@@ -33,7 +34,19 @@ const SidebarContent = ({onClose}: sidebarContentProps ) => {
     <Flex direction="column" height="100vh"  justify="space-between" bgColor="#579AFF">
       <VStack align="flex-start" >
         <Box boxShadow="md" w="full">
-        <Heading size="lg" color="white" m={2} >Dashboard</Heading>
+          <HStack>
+            <Heading size="lg" color="white" m={2} >Dashboard</Heading>
+            <Hide above="lg">
+              <Spacer/>
+              <IconButton
+                icon={<IoMdClose />}
+                aria-label="Close menu"
+                onClick={onClose}
+                variant="primary"
+                mr={2}
+              />
+            </Hide>
+          </HStack>
         </Box>
         <RoleGuard allowedRoles={["admin"]}>
           <Button onClick={onClose} as={Link} to="/dashboard/companies" variant={isActive("/dashboard/companies") ? "selected_nav" : "nav"} leftIcon={<MdOutlineHomeWork/>} >

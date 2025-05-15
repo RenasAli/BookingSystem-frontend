@@ -1,4 +1,4 @@
-import { Box, Flex, Hide, Show } from "@chakra-ui/react";
+import { Box, Flex, Hide, HStack, Show } from "@chakra-ui/react";
 import { Routes, Route } from "react-router-dom";
 import { Bookings, Staff, Companies, CreateCompany, Services, Settings, Profile, OffDay} from "../pages";
 import MobileSidebar from "./MobileSidebar";
@@ -10,7 +10,14 @@ const Dashboard = () => {
     <>
     <RoleGuard allowedRoles={["company_admin", "admin", "company_staff"]}>
     <Hide above="lg">
-      <MobileSidebar/>
+      <HStack 
+        bg="#579AFF"
+        w="100%"
+        h= "50px"
+        boxShadow="md"
+      >
+        <MobileSidebar/>
+      </HStack>
     </Hide>
     <Flex h="100vh" overflow="hidden">
       <Show above="lg" >
