@@ -10,5 +10,6 @@ export default interface Booking {
     status: Status;
     startTime: string;
     endTime: string;
-    createdAt?: string; 
+    createdAt?: string;
+    cancellationReason?: string;
 }

@@ -159,7 +159,24 @@ import {
   
                 <Box mb={2}>
                   <Text fontWeight="bold">Frisør:</Text>
-                  <Text>{staff?.name || "Unknown"}</Text>
+                  <Text>{staff?.name || "Ikke fundet"}</Text>
+                </Box>
+
+                <Box mb={2}>
+                  {booking.status === "cancelled" && (
+                    <>
+                      <Text fontWeight="bold">Aflyst:</Text>
+                      {booking.cancellationReason === "customer cancelled" ? (
+                        <Text>Kunde aflyste</Text>
+                      ) : booking.cancellationReason === "no show" ? (
+                        <Text>Kunde dukkede ikke op</Text>
+                      ) : booking.cancellationReason === "staff deleted" ? (
+                        <Text>Medarbejder blev slettet</Text>
+                      ) : booking.cancellationReason === "service deleted" ? (
+                        <Text>Service blev slettet</Text>
+                      ) : null}
+                    </>
+                  )}
                 </Box>
               </>
             )}
