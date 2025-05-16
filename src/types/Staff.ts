@@ -3,6 +3,7 @@ export default interface Staff {
     name: string | null,
     email: string | null,
     phone: string | null,
+    password?: string,
     staffWorkdays: Array<staffWorkdays>
 }
 

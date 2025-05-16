@@ -72,6 +72,14 @@ import Staff from "../types/Staff";
                   value={staff?.email || ""}
                   onChange={(e) => onChange("email", e.target.value)}
                 />
+                {!isEditing ?<FormLabel>Password</FormLabel>:''}
+                {!isEditing ?
+                <Input
+                  autoComplete="new-password"
+                  type="password"
+                  onChange={(e) => onChange("password", e.target.value)}
+                />
+                : ""}
                 <FormLabel>Tlf</FormLabel>
                 <Input
                   type="text"
