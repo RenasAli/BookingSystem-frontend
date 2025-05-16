@@ -1,6 +1,6 @@
 import { Button, SimpleGrid, useDisclosure, useToast } from "@chakra-ui/react"
 import useStaff from "../hooks/useStaff";
-import Staffs from "../types/Staff";
+import Staffs, { staffWorkdays } from "../types/Staff";
 import { StaffCard } from "../components";
 import { useState } from "react";
 import { useCreateMutation } from "../hooks/useCreateMutation";
@@ -9,6 +9,16 @@ import { useQueryClient } from "@tanstack/react-query";
 import StaffModal from "../components/StaffModal";
 import ConfirmDialogBox from "../components/ConfirmDialogBox";
 import { RoleGuard } from "../auth/RoleGuard";
+
+const weekdayTemplate: staffWorkdays[] = [
+    { weekdayId: 1, isActive: false, startTime: "00:00:00", endTime: "00:00:00" },
+    { weekdayId: 2, isActive: false, startTime: "00:00:00", endTime: "00:00:00" },
+    { weekdayId: 3, isActive: false, startTime: "00:00:00", endTime: "00:00:00" },
+    { weekdayId: 4, isActive: false, startTime: "00:00:00", endTime: "00:00:00" },
+    { weekdayId: 5, isActive: false, startTime: "00:00:00", endTime: "00:00:00" },
+    { weekdayId: 6, isActive: false, startTime: "00:00:00", endTime: "00:00:00" },
+    { weekdayId: 7, isActive: false, startTime: "00:00:00", endTime: "00:00:00" },
+]
 
 const Staff = () => {
   const queryClient = useQueryClient();
@@ -64,6 +74,7 @@ const Staff = () => {
 
   const handleOnOpenCreateModal = () => {
     setStaff(undefined);
+    setStaff((prev) => ({ ...prev, staffWorkdays: weekdayTemplate } as Staffs));
     onOpen();
   }
 
@@ -85,6 +96,9 @@ const Staff = () => {
           break;
         case "email":
           updatedStaff.email = value as string;
+          break;
+        case "password":
+          updatedStaff.password = value as string;
           break;
         case "phone":
           updatedStaff.phone = value as string;
