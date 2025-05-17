@@ -34,7 +34,8 @@ const Logind = ()=> {
       isClosable: true,
     });
     handleLogin(loginUser, toast).then((user)=> { 
-      Cookies.set("role", user?.user?.role);
+      const expirationDate = new Date(new Date().getTime() + 3 * 60 * 60 * 1000);
+      Cookies.set("role", user?.user?.role, { expires: expirationDate });
       if(user.user.role === "admin"){
         navigate("/dashboard/companies")
       } else {
