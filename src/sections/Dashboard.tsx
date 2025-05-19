@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { Bookings, Staff, Companies, CreateCompany, Services, Settings, Profile, OffDay} from "../pages";
 import MobileSidebar from "./MobileSidebar";
 import DesktopSidebar from "./DesktopSidebar";
-import { RoleGuard } from "../auth/RoleGuard";
+import { RoleGuard, RoleProtectedRoute } from "../auth/RoleGuard";
 
 const Dashboard = () => {
   return (
@@ -27,13 +27,29 @@ const Dashboard = () => {
         <Routes>
           <Route path="/bookings" element={<Bookings />} />
           <Route path="/staff" element={<Staff />} />
-          <Route path="/companies" element={<Companies />} />
-          <Route path="/companies/create-company" element={<CreateCompany />} />
+          <Route path="/companies" element={
+            <RoleProtectedRoute allowedRoles={["admin"]}>
+              <Companies />
+            </RoleProtectedRoute>
+          }/>
+          <Route path="/companies/create-company" element={
+            <RoleProtectedRoute allowedRoles={["admin"]}>
+              <CreateCompany />
+            </RoleProtectedRoute>
+          } />
           <Route path="/services" element={<Services />} />
           <Route path="/off-day" element={<OffDay />} />
-          <Route path="/settings" element={<Settings />} />
+          <Route path="/settings" element={
+            <RoleProtectedRoute allowedRoles={["company_admin"]}>
+              <Settings />
+            </RoleProtectedRoute>
+          } />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/companies/settings" element={<Settings />} />
+          <Route path="/companies/settings" element={
+            <RoleProtectedRoute allowedRoles={["admin"]}>
+              <Settings />
+            </RoleProtectedRoute>
+          }/>
         </Routes>
       </Box>
     </Flex>

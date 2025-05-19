@@ -12,9 +12,11 @@ interface RoleGuardProps {
 
   export const RoleGuard: React.FC<RoleGuardProps> = ({ allowedRoles, children }) => {
     const role = Cookies.get("role");
-
-    if (!role || !allowedRoles.includes(role)) {
-      return null ; 
+    if(!role){
+      return <Navigate to="/login" /> ; 
+    }
+    if (!allowedRoles.includes(role)) {
+      return null
     }
   
     return <>{children}</>;
@@ -24,14 +26,14 @@ interface RoleGuardProps {
     const role = Cookies.get("role");
 
     if (!role || !allowedRoles.includes(role)) {
-      return <Navigate to="/login" /> 
-    }
-
-    if (role === "company_admin" || role === "company_staff") {
-      return <Navigate to="/dashboard/bookings" />
-    }
-    if (role === "admin") {
-      return <Navigate to="/dashboard/companies" />
+      if (!role) {
+        return <Navigate to="/login" /> ; 
+      }
+      if (role === "company_admin" || role === "company_staff") {
+        return <Navigate to="/dashboard/bookings" />
+      } else if (role === "admin") {
+        return <Navigate to="/dashboard/companies" />
+      }
     }
     
     return <>{children}</>;
@@ -40,7 +42,7 @@ interface RoleGuardProps {
   interface RoleProtectedElementProps {
     allowedRoles: string[];
     children: React.ReactElement;
-    fallback?: React.ReactElement; 
+    fallback?: React.ReactElement;
   }
   
   export const RoleProtectedElement: React.FC<RoleProtectedElementProps> = ({ allowedRoles, children, fallback = null }) => {
