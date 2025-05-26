@@ -41,6 +41,7 @@ const CompaniesTable = ({data}: companyProps) => {
                     variant='outline'
                     borderWidth={0}
                     aria-label='Edit'
+                    data-cy="edit-company-btn"
                     as={Link}
                     to={`settings?companyId=${company.id}`}
                     icon={<GrEdit/>}                 

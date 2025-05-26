@@ -35,7 +35,7 @@ const OffDaysCard = ({ offDay, onOpen, getDeleteId }: OffDayCardProps) => {
               mt={-2} mr={-4}
             />
             <MenuList minW="120px" p={0}>
-              <Button w="full" rightIcon={<RiDeleteBin6Line />} onClick={() => getDeleteId(offDay.id)} variant="cancel">
+              <Button data-cy="delete-button" w="full" rightIcon={<RiDeleteBin6Line />} onClick={() => getDeleteId(offDay.id)} variant="cancel">
                 Slet
               </Button>
             </MenuList>
@@ -48,7 +48,7 @@ const OffDaysCard = ({ offDay, onOpen, getDeleteId }: OffDayCardProps) => {
       </CardBody>
       <CardFooter>
         <RoleGuard allowedRoles={["company_admin"]}>
-          <Button variant="primary" onClick={handleOnOpen}>Redigere</Button>
+          <Button data-cy="edit-button" variant="primary" onClick={handleOnOpen}>Redigere</Button>
         </RoleGuard>
       </CardFooter>
     </Card>

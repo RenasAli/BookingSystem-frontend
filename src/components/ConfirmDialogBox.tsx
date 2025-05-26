@@ -35,16 +35,16 @@ import {
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent>
-                <ModalHeader>{header}</ModalHeader>
+                <ModalHeader data-cy="confirm-dialog-header">{header}</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
                 {description}
                 </ModalBody>
                 <ModalFooter>
-                    <Button variant="cancel" mr={3} onClick={handleConfirmClick} isLoading={confirmIsLoading}>
+                    <Button data-cy="confirm-delete-btn" variant="cancel" mr={3} onClick={handleConfirmClick} isLoading={confirmIsLoading}>
                     {confirmButtonText}
                     </Button>
-                    <Button variant="primary" mr={3} onClick={onClose}>
+                    <Button data-cy="cancel-delete-btn" variant="primary" mr={3} onClick={onClose}>
                     {closeButtonText}
                     </Button>
                 </ModalFooter>

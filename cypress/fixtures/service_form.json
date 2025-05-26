@@ -1,0 +1,11 @@
+{
+    "name": "Test Service",
+    "description": "This is a test service description.",
+    "price": "50.00",
+    "duration": "60",
+
+    "nameUpdate": "Updated Test Service",
+    "descriptionUpdate": "This is an updated test service description.",
+    "priceUpdate": "75.00",
+    "durationUpdate": "30"
+}
