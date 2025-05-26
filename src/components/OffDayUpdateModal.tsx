@@ -1,10 +1,11 @@
 import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, FormControl, FormLabel, ModalFooter, Button, HStack, Input } from "@chakra-ui/react";
 import OffDay from "../types/OffDay";
 import { useEffect, useState } from "react";
-import { format } from "date-fns";
 import { useCreateMutation } from "../hooks/useCreateMutation";
 import CreateOffDay from "../types/CreateOffDate";
 import { useQueryClient } from "@tanstack/react-query";
+import { getLocalDateAndTimeString } from "../utils/localDateString";
+import dayjs from "dayjs";
 
 interface OffDayModalProps {
     isOpen: boolean;
@@ -15,7 +16,8 @@ interface OffDayModalProps {
 const OffDayUpdateModal = ({isOpen, onClose, offDay}:OffDayModalProps) => {
     const queryClient = useQueryClient();
     
-    const updateMutation = useCreateMutation<CreateOffDay>({ endpoint: `off-day/${offDay?.id}`, method: "PUT",          onSuccess: async() => {
+    const updateMutation = useCreateMutation<CreateOffDay>({ endpoint: `off-day/${offDay?.id}`, method: "PUT",
+      onSuccess: async() => {
         await queryClient.invalidateQueries({queryKey: ['off-day', offDay?.id]});
         await queryClient.refetchQueries({ queryKey: ["off-day",offDay?.id] });
         setStartDate('');
@@ -30,17 +32,17 @@ const OffDayUpdateModal = ({isOpen, onClose, offDay}:OffDayModalProps) => {
     const [endTime, setEndTime] = useState('23:59');
 
     useEffect(() => {
-        if(offDay){
-            setStartDate(format(new Date(offDay.startDate), 'yyyy-MM-dd'));
-            setStartTime(format(new Date(offDay.startDate), 'HH:mm'));
-            setEndDate(format(new Date(offDay!.endDate), 'yyyy-MM-dd'));
-            setEndTime(format(new Date(offDay.endDate), 'HH:mm'));
+        if (offDay) {
+          setStartDate(dayjs.utc(offDay.startDate).format('YYYY-MM-DD'));
+          setStartTime(dayjs.utc(offDay.startDate).format('HH:mm'));
+          setEndDate(dayjs.utc(offDay.endDate).format('YYYY-MM-DD'));
+          setEndTime(dayjs.utc(offDay.endDate).format('HH:mm'));
         }
     },[offDay]);
 
     const getISODateTime = (date: string, time: string) => {
         if (!date || !time) return '';
-        return new Date(`${date}T${time}`).toISOString();
+        return getLocalDateAndTimeString(new Date(`${date}T${time}`));
     };
 
     const onSubmit = () =>{

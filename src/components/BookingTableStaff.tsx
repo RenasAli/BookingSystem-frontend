@@ -131,7 +131,7 @@ const BookingTableStaff = () => {
             {bookings
               ?.filter((booking) => {
                 const start = dayjs(booking.startTime);
-                const rowStart = dayjs(`${selectedDate.format("YYYY-MM-DD")} ${time}`);
+                const rowStart = dayjs.utc(`${selectedDate.format("YYYY-MM-DD")} ${time}`);
                 const rowEnd = rowStart.add(1, "hour");
                 return (
                   start.isSameOrAfter(rowStart) &&
@@ -140,8 +140,8 @@ const BookingTableStaff = () => {
                 );
               })
               .map((booking) => {
-                const start = dayjs(booking.startTime);
-                const end = dayjs(booking.endTime);
+                const start = dayjs.utc(booking.startTime);
+                const end = dayjs.utc(booking.endTime);
 
                 return (
                   <Button
@@ -161,8 +161,8 @@ const BookingTableStaff = () => {
           <Td borderRight="1px solid #E2E8F0">
             {bookings
               ?.filter((booking) => {
-                const start = dayjs(booking.startTime);
-                const rowStart = dayjs(`${selectedDate.format("YYYY-MM-DD")} ${time}`);
+                const start = dayjs.utc(booking.startTime);
+                const rowStart = dayjs.utc(`${selectedDate.format("YYYY-MM-DD")} ${time}`);
                 const rowEnd = rowStart.add(1, "hour");
                 return (
                   start.isSameOrAfter(rowStart) &&
@@ -171,8 +171,8 @@ const BookingTableStaff = () => {
                 );
               })
               .map((booking) => {
-                const start = dayjs(booking.startTime);
-                const end = dayjs(booking.endTime);
+                const start = dayjs.utc(booking.startTime);
+                const end = dayjs.utc(booking.endTime);
 
                 return (
                   <Button
@@ -192,8 +192,8 @@ const BookingTableStaff = () => {
           <Td>
             {bookings
               ?.filter((booking) => {
-                const start = dayjs(booking.startTime);
-                const rowStart = dayjs(`${selectedDate.format("YYYY-MM-DD")} ${time}`);
+                const start = dayjs.utc(booking.startTime);
+                const rowStart = dayjs.utc(`${selectedDate.format("YYYY-MM-DD")} ${time}`);
                 const rowEnd = rowStart.add(1, "hour");
                 return (
                   start.isSameOrAfter(rowStart) &&
@@ -202,8 +202,8 @@ const BookingTableStaff = () => {
                 );
               })
               .map((booking) => {
-                const start = dayjs(booking.startTime);
-                const end = dayjs(booking.endTime);
+                const start = dayjs.utc(booking.startTime);
+                const end = dayjs.utc(booking.endTime);
                 
                 const getColorScheme = (status: string) => {
                   switch (status) {
