@@ -59,17 +59,18 @@ const BookingModal = ({ isOpen, onClose, booking, setBooking }: BookingModalProp
         <ModalBody>
           <FormControl mb={4}>
             <FormLabel>Kunde Navn</FormLabel>
-            <Input name="customerName" value={booking.customerName} onChange={handleInputChange} />
+            <Input data-cy="customer-name" name="customerName" value={booking.customerName} onChange={handleInputChange} />
           </FormControl>
           <FormControl mb={4}>
             <FormLabel>Kunde Telefon</FormLabel>
-            <Input name="customerPhone" value={booking.customerPhone} onChange={handleInputChange} />
+            <Input data-cy="customer-phone" name="customerPhone" value={booking.customerPhone} onChange={handleInputChange} />
           </FormControl>
           <FormControl mb={4}>
             <FormLabel>Dato</FormLabel>
             <Input
               name="startDate"
               type="date"
+              data-cy="start-date"
               value={booking.startTime.split("T")[0]}
               onChange={(e) => {
                 const newDate = e.target.value;
@@ -84,6 +85,7 @@ const BookingModal = ({ isOpen, onClose, booking, setBooking }: BookingModalProp
             <Input
               name="startTime"
               type="time"
+              data-cy="start-time"
               value={booking.startTime.split("T")[1]}
               onChange={(e) => {
                 const newTime = e.target.value;
@@ -98,6 +100,7 @@ const BookingModal = ({ isOpen, onClose, booking, setBooking }: BookingModalProp
             <Input
               name="endTime"
               type="time"
+              data-cy="end-time"
               value={booking.endTime.split("T")[1]}
               onChange={(e) => {
                 const newTime = e.target.value;
@@ -112,7 +115,7 @@ const BookingModal = ({ isOpen, onClose, booking, setBooking }: BookingModalProp
           <Button variant="ghost" onClick={onClose} isDisabled={isSubmitting}>
             Annuller
           </Button>
-          <Button variant="primary" onClick={handleSubmit} isLoading={isSubmitting}>
+          <Button data-cy="confirm-button" variant="primary" onClick={handleSubmit} isLoading={isSubmitting}>
             Bekræft
           </Button>
         </ModalFooter>

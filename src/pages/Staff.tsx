@@ -133,7 +133,7 @@ const Staff = () => {
   return (
     <>
       <RoleGuard allowedRoles={["company_admin"]}>
-        <Button variant="success" mr={3} mb={5} onClick={handleOnOpenCreateModal}>
+        <Button data-cy="create-staff-button" variant="success" mr={3} mb={5} onClick={handleOnOpenCreateModal}>
           Opret Medarbejder
         </Button>
       </RoleGuard>

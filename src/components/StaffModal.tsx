@@ -63,12 +63,14 @@ import Staff from "../types/Staff";
                 <FormLabel>Navn</FormLabel>
                 <Input
                   type="text"
+                  data-cy="staff-name"
                   value={staff?.name || ""}
                   onChange={(e) => onChange("name", e.target.value)}
                 />
                 <FormLabel>Email</FormLabel>
                 <Input
                   type="email"
+                  data-cy="staff-email"
                   value={staff?.email || ""}
                   onChange={(e) => onChange("email", e.target.value)}
                 />
@@ -77,12 +79,14 @@ import Staff from "../types/Staff";
                 <Input
                   autoComplete="new-password"
                   type="password"
+                  data-cy="staff-password"
                   onChange={(e) => onChange("password", e.target.value)}
                 />
                 : ""}
                 <FormLabel>Tlf</FormLabel>
                 <Input
                   type="text"
+                  data-cy="staff-phone"
                   value={staff?.phone || ""}
                   onChange={(e) => onChange("phone", e.target.value)}
                 />
@@ -108,6 +112,7 @@ import Staff from "../types/Staff";
                             <HStack>
                               <FormLabel>{["Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag", "Søndag"][day.weekdayId - 1]}</FormLabel>
                               <Checkbox
+                                data-cy={`staff-workday-start-${day.weekdayId}`}
                                 isChecked={day?.isActive}
                                 onChange={(e) => handleWorkdayChange(index, "isActive", e.target.checked)}
                               />
@@ -117,6 +122,7 @@ import Staff from "../types/Staff";
                               <FormControl>
                                   <Input
                                     type="time"
+                                    data-cy={`staff-workday-start-time-${day.weekdayId}`}
                                     value={day.startTime || ""}
                                     onChange={(e) => handleWorkdayChange(index, "startTime", e.target.value)}
                                     isDisabled={!day.isActive}
@@ -128,6 +134,7 @@ import Staff from "../types/Staff";
                               <FormControl>
                                 <Input
                                   type="time"
+                                  data-cy={`staff-workday-end-time-${day.weekdayId}`}
                                   value={day.endTime || ""}
                                   onChange={(e) => handleWorkdayChange(index, "endTime", e.target.value)}
                                   isDisabled={!day.isActive}
@@ -141,10 +148,10 @@ import Staff from "../types/Staff";
               </Box>
             </ModalBody>
             <ModalFooter>
-              <Button variant="cancel" mr={3} onClick={onClose}>
+              <Button data-cy="cancel-button" variant="cancel" mr={3} onClick={onClose}>
                 Luk
               </Button>
-              <Button variant={isEditing ? "primary" : "success"} type="submit">
+              <Button data-cy="submit-button" variant={isEditing ? "primary" : "success"} type="submit">
                 {isEditing ? "Gem" : "Opret"}
               </Button>
             </ModalFooter>

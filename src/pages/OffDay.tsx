@@ -62,7 +62,7 @@ const OffDay = () => {
   return (
     <>
       <RoleGuard allowedRoles={["company_admin"]}>
-        <Button variant="success" mr={3} mb={5} onClick={onOpenCreateModal}>
+        <Button data-cy="create-off-day-button" variant="success" mr={3} mb={5} onClick={onOpenCreateModal}>
           Registrer Ferie
         </Button>
 

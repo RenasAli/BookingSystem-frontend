@@ -132,11 +132,12 @@ const PublicBooking = () => {
     <Container maxW={750} p={8} pt="80px">
         <Box borderWidth='1px' p={5} mt={5} boxShadow="lg">
             <HStack>
-                <Text mb={5}>Bestil til hos {company?.name}</Text>
+                <Text mb={5}>Bestil tid hos {company?.name}</Text>
                 <Spacer/>
                 <Select
                     value={String(selectedServiceId)}
                     onChange={handleSelectServiceChange}
+                    data-cy="service-select"
                     maxW="200px"
                     mb={5}
                     isDisabled={selectedTime?.isSelected}

@@ -1,0 +1,27 @@
+{
+    "companyName": "e2e Salon",
+    "cvr": "323323",
+    "companyEmail": "e2e@salon.dk",
+    "companyPhone": "33322333",
+    "url": "e2e-salon",
+
+    "adminName": "Edward",
+    "adminEmail": "Edward@test.dk",
+    "adminPassword": "123123",
+
+    "street": "Culdesac 323",
+    "city": "Endhavn",
+    "zipCode": "3230",
+
+    "companyNameUpdate": "e2e Salon2",
+    "cvrUpdate": "32332388",
+    "companyEmailUpdate": "e2e@salon2.dk",
+    "companyPhoneUpdate": "12345678",
+    "urlUpdate": "e2e-salon2",
+
+    "adminEmailUpdate": "Edward2@test.dk",
+
+    "streetUpdate": "Culdesac2 323",
+    "cityUpdate": "Endhavn2",
+    "zipCodeUpdate": "1234"
+}

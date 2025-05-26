@@ -43,24 +43,28 @@ import {
                                 <FormLabel>Navn</FormLabel>
                                 <Input
                                     type="text"
+                                    data-cy="service-name"
                                     value={service?.name || ""}
                                     onChange={(e) => onChange("name", e.target.value)}
                                 />
                                 <FormLabel>Beskrivelse</FormLabel>
                                 <Input
                                     type="text"
+                                    data-cy="service-description"
                                     value={service?.description || ""}
                                     onChange={(e) => onChange("description", e.target.value)}
                                 />
                                 <FormLabel>Pris</FormLabel>
                                 <Input
                                     type="number"
+                                    data-cy="service-price"
                                     value={service?.price || ""}
                                     onChange={(e) => onChange("price", e.target.value)}
                                 />
                                 <FormLabel>Varighed</FormLabel>
                                 <Input
                                     type="number"
+                                    data-cy="service-duration"
                                     value={service?.durationMinutes || ""}
                                     onChange={(e) => onChange("durationMinutes", e.target.value)}
                                 />
@@ -68,10 +72,10 @@ import {
                         </ModalBody>
 
                         <ModalFooter>
-                            <Button variant={isEditing ? "primary" : "success"} mr={3} type="submit">
+                            <Button data-cy="submit-button" variant={isEditing ? "primary" : "success"} mr={3} type="submit">
                                 {isEditing ? "Gem" : "Opret"}
                             </Button>
-                            <Button variant="ghost" onClick={onClose}>
+                            <Button data-cy="close-button" variant="ghost" onClick={onClose}>
                                 Luk
                             </Button>
                         </ModalFooter>

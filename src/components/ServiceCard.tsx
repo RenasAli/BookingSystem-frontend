@@ -35,6 +35,7 @@ const ServiceCard = ({ service, onOpen, getDeleteId }: ServiceCardProps) => {
                             <Button
                                 w="full"
                                 rightIcon={<RiDeleteBin6Line />}
+                                data-cy="delete-button"
                                 onClick={() => id && getDeleteId(id)}
                                 variant="cancel"
                             >
@@ -51,7 +52,7 @@ const ServiceCard = ({ service, onOpen, getDeleteId }: ServiceCardProps) => {
             </CardBody>
             <CardFooter>
                 <RoleGuard allowedRoles={["company_admin"]}>
-                    <Button variant="primary" onClick={handleOnOpen}>Redigere</Button>
+                    <Button data-cy="edit-button" variant="primary" onClick={handleOnOpen}>Redigere</Button>
                 </RoleGuard>
             </CardFooter>
         </Card>

@@ -37,6 +37,7 @@ const StaffCard = ({ id, name, email, phone, staffWorkdays, onOpen, getDeleteId 
                         <MenuList minW="120px" p={0}>
                             <Button
                                 w="full"
+                                data-cy="delete-button"
                                 rightIcon={<RiDeleteBin6Line />}
                                 onClick={() => id && getDeleteId(id)} // ✅ use passed-in delete handler
                                 variant="cancel"
@@ -53,7 +54,7 @@ const StaffCard = ({ id, name, email, phone, staffWorkdays, onOpen, getDeleteId 
             </CardBody>
             <CardFooter>
                 <RoleGuard allowedRoles={["company_admin"]}>
-                    <Button variant="primary" onClick={handleOnOpen}>Redigere</Button>
+                    <Button data-cy="edit-button" variant="primary" onClick={handleOnOpen}>Redigere</Button>
                 </RoleGuard>
             </CardFooter>
         </Card>

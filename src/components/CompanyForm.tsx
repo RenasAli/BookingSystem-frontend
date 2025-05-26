@@ -64,9 +64,9 @@ import { RoleGuard, RoleProtectedElement } from "../auth/RoleGuard";
           <Tabs >
             <TabList>
               <Tab>Info</Tab>
-              <Tab>Ejer</Tab>
-              <Tab>Adresse</Tab>
-              <Tab>Åbningstider</Tab>
+              <Tab data-cy="admin-tab">Ejer</Tab>
+              <Tab data-cy="address-tab">Adresse</Tab>
+              <Tab data-cy="open-hours-tab">Åbningstider</Tab>
             </TabList>
             <TabPanels>
               <TabPanel>
@@ -83,6 +83,7 @@ import { RoleGuard, RoleProtectedElement } from "../auth/RoleGuard";
                       <RoleProtectedElement allowedRoles={['admin']}>
                         <Input
                           type="text"
+                          data-cy="company-name-input"
                           value={company?.name || ""}
                           onChange={(e) => onChange("companyName", e.target.value)}
                         />
@@ -94,6 +95,7 @@ import { RoleGuard, RoleProtectedElement } from "../auth/RoleGuard";
                       <RoleProtectedElement allowedRoles={['admin']}>
                         <Input
                           type="number"
+                          data-cy="cvr-input"
                           value={company?.cvr || ""}
                           onChange={(e) => onChange("cvr", e.target.value)}
                         />
@@ -104,6 +106,7 @@ import { RoleGuard, RoleProtectedElement } from "../auth/RoleGuard";
                       <FormLabel>Virksomhedens Email</FormLabel>
                       <Input
                         type="email"
+                        data-cy="company-email-input"
                         value={company?.email || ""}
                         onChange={(e) => onChange("companyEmail", e.target.value)}
                       />
@@ -113,6 +116,7 @@ import { RoleGuard, RoleProtectedElement } from "../auth/RoleGuard";
                       <FormLabel>Virksomhedens Tlf</FormLabel>
                       <Input
                         type="number"
+                        data-cy="company-phone-input"
                         value={company?.phone || ""}
                         onChange={(e) => onChange("companyPhone", e.target.value)}
                       />
@@ -139,6 +143,7 @@ import { RoleGuard, RoleProtectedElement } from "../auth/RoleGuard";
                       <RoleProtectedElement allowedRoles={['admin']}>
                         <Input
                           type="text"
+                          data-cy="company-url-input"
                           value={company?.url || ""}
                           onChange={(e) => onChange("url", e.target.value)}
                         />
@@ -149,6 +154,7 @@ import { RoleGuard, RoleProtectedElement } from "../auth/RoleGuard";
                       <RoleProtectedElement allowedRoles={['admin']}>
                         <Select
                           placeholder="Vælg en metode"
+                          data-cy="confirmation-method-select"
                           value={company?.confirmationMethod || ""}
                           onChange={(e) => onChange("confirmationMethod", e.target.value)}
                         >
@@ -174,6 +180,7 @@ import { RoleGuard, RoleProtectedElement } from "../auth/RoleGuard";
                       <FormLabel>Ejers Email</FormLabel>
                       <Input
                         type="email"
+                        data-cy="admin-email-input"
                         value={company?.user.email || ""}
                         onChange={(e) => onChange("adminEmail", e.target.value)}
                       />
@@ -195,6 +202,7 @@ import { RoleGuard, RoleProtectedElement } from "../auth/RoleGuard";
                       <FormLabel>Adresse</FormLabel>
                       <Input
                         type="text"
+                        data-cy="company-street-input"
                         value={company?.address.street || ""}
                         onChange={(e) => onChange("street", e.target.value)}
                       />
@@ -204,6 +212,7 @@ import { RoleGuard, RoleProtectedElement } from "../auth/RoleGuard";
                       <FormLabel>By</FormLabel>
                       <Input
                         type="text"
+                        data-cy="company-city-input"
                         value={company?.address.city || ""}
                         onChange={(e) => onChange("city", e.target.value)}
                       />
@@ -213,6 +222,7 @@ import { RoleGuard, RoleProtectedElement } from "../auth/RoleGuard";
                       <FormLabel>Postnummer</FormLabel>
                       <Input
                         type="number"
+                        data-cy="company-zip-input"
                         value={company?.address.zipCode || ""}
                         onChange={(e) => onChange("zipCode", e.target.value)}
                       />
@@ -242,6 +252,7 @@ import { RoleGuard, RoleProtectedElement } from "../auth/RoleGuard";
                               <HStack>
                                 <FormLabel>{["Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag", "Søndag"][day.weekdayId - 1]}</FormLabel>
                                 <Checkbox
+                                  data-cy={`company-workday-start-${day.weekdayId}`}
                                   isChecked={day?.isOpen}
                                   onChange={(e) => handleWorkdayChange(index, "isOpen", e.target.checked)}
                                 />
@@ -251,6 +262,7 @@ import { RoleGuard, RoleProtectedElement } from "../auth/RoleGuard";
                                 <FormControl>
                                     <Input
                                       type="time"
+                                      data-cy={`company-workday-start-time-${day.weekdayId}`}
                                       value={day.openTime || ""}
                                       onChange={(e) => handleWorkdayChange(index, "openTime", e.target.value)}
                                       isDisabled={!day.isOpen}
@@ -263,6 +275,7 @@ import { RoleGuard, RoleProtectedElement } from "../auth/RoleGuard";
                                 <FormControl>
                                   <Input
                                     type="time"
+                                    data-cy={`company-workday-end-time-${day.weekdayId}`}
                                     value={day.closeTime || ""}
                                     onChange={(e) => handleWorkdayChange(index, "closeTime", e.target.value)}
                                     isDisabled={!day.isOpen}
@@ -283,13 +296,14 @@ import { RoleGuard, RoleProtectedElement } from "../auth/RoleGuard";
             <RoleGuard allowedRoles={["admin"]}>
               <Button 
                 variant="cancel"
+                data-cy="delete-btn"
                 isLoading={deleteIsPending}
                 onClick={onOpen}
               >
                 Slet Virksomheden
               </Button>
             </RoleGuard>
-            <Button variant="success" type="submit">
+            <Button data-cy="submit-button" variant="success" type="submit">
               Gem
             </Button>
           </Stack>
