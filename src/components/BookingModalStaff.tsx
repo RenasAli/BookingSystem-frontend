@@ -66,13 +66,13 @@ import {
     
         if (name === "startTime_date" || name === "startTime_time" || name === "endTime_time") {
           const [field, type] = name.split("_");
-          const currentDateTime = dayjs(prev[field as keyof Booking]);
+          const currentDateTime = dayjs.utc(prev[field as keyof Booking]);
           let updatedDateTime;
     
           if (type === "date") {
-            updatedDateTime = dayjs(value + "T" + currentDateTime.format("HH:mm"));
+            updatedDateTime = dayjs.utc(value + "T" + currentDateTime.format("HH:mm"));
           } else if (type === "time") {
-            updatedDateTime = dayjs(currentDateTime.format("YYYY-MM-DD") + "T" + value);
+            updatedDateTime = dayjs.utc(currentDateTime.format("YYYY-MM-DD") + "T" + value);
           }
     
           return updatedDateTime
@@ -115,8 +115,8 @@ import {
                   <Input
                     name="startTime_date"
                     type="date"
+                    value={dayjs.utc(editableBooking?.startTime).format("YYYY-MM-DD")}
                     data-cy="start-date"
-                    value={dayjs(editableBooking?.startTime).format("YYYY-MM-DD")}
                     onChange={handleInputChange}
                     onFocus={(e) => e.target.showPicker()}
                   />
@@ -126,8 +126,8 @@ import {
                   <Input
                     name="startTime_time"
                     type="time"
+                    value={dayjs.utc(editableBooking?.startTime).format("HH:mm")}
                     data-cy="start-time"
-                    value={dayjs(editableBooking?.startTime).format("HH:mm")}
                     onChange={handleInputChange}
                     onFocus={(e) => e.target.showPicker()}
                   />
@@ -137,8 +137,8 @@ import {
                   <Input
                     name="endTime_time"
                     type="time"
+                    value={dayjs.utc(editableBooking?.endTime).format("HH:mm")}
                     data-cy="end-time"
-                    value={dayjs(editableBooking?.endTime).format("HH:mm")}
                     onChange={handleInputChange}
                     onFocus={(e) => e.target.showPicker()}
                   />
