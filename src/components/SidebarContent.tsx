@@ -57,29 +57,28 @@ const SidebarContent = ({onClose}: sidebarContentProps ) => {
           <Button onClick={onClose}  as={Link} to="/dashboard/bookings" variant={isActive("/dashboard/bookings") ? "selected_nav" : "nav"} leftIcon={<LuCalendarFold/>} >
             Kalender
           </Button>
-          <Button onClick={onClose} as={Link} to="/dashboard/staff" variant={isActive("/dashboard/staff") ? "selected_nav" : "nav"} leftIcon={<IoIosPeople/>} >
+          <Button data-cy="staff-button" onClick={onClose} as={Link} to="/dashboard/staff" variant={isActive("/dashboard/staff") ? "selected_nav" : "nav"} leftIcon={<IoIosPeople/>} >
             Medarbejder
           </Button>
-          <Button onClick={onClose} as={Link} to="/dashboard/services" variant={isActive("/dashboard/services") ? "selected_nav" : "nav"} leftIcon={<LuClipboardList/>}>
+          <Button data-cy="services-button" onClick={onClose} as={Link} to="/dashboard/services" variant={isActive("/dashboard/services") ? "selected_nav" : "nav"} leftIcon={<LuClipboardList/>}>
             Services
           </Button>
-          <Button onClick={onClose} as={Link} to="/dashboard/off-day" variant={isActive("/dashboard/off-day") ? "selected_nav" : "nav"} leftIcon={<TbBeach/>}>
+          <Button data-cy="off-day-button" onClick={onClose} as={Link} to="/dashboard/off-day" variant={isActive("/dashboard/off-day") ? "selected_nav" : "nav"} leftIcon={<TbBeach/>}>
             Ferie
           </Button>
         </RoleGuard>
         <RoleGuard allowedRoles={["company_admin"]}>
-          <Button onClick={onClose} as={Link} to="/dashboard/settings" variant={isActive("/dashboard/settings") ? "selected_nav" : "nav"} leftIcon={<MdOutlineSettingsSuggest/>} >
+          <Button data-cy="settings-button" onClick={onClose} as={Link} to="/dashboard/settings" variant={isActive("/dashboard/settings") ? "selected_nav" : "nav"} leftIcon={<MdOutlineSettingsSuggest/>} >
             Indstillinger
           </Button>
         </RoleGuard>
         <RoleGuard allowedRoles={["company_staff"]}>
-          <Button onClick={onClose} as={Link} to="/dashboard/profile" variant={isActive("/dashboard/profile") ? "selected_nav" : "nav"} leftIcon={<CgProfile/>}>
+          <Button data-cy="profile-button" onClick={onClose} as={Link} to="/dashboard/profile" variant={isActive("/dashboard/profile") ? "selected_nav" : "nav"} leftIcon={<CgProfile/>}>
               Profil
           </Button>
         </RoleGuard>
       </VStack>
-    
-      <Button variant="nav" leftIcon={<SlLogout />} onClick={() => handleLogout(handleUserOnLogout, toast, navigate)}>
+      <Button data-cy="logout-button" variant="nav" leftIcon={<SlLogout />} onClick={() => handleLogout(handleUserOnLogout, toast, navigate)}>
         Log ud
       </Button>
     </Flex>

@@ -69,6 +69,7 @@ const OffDayUpdateModal = ({isOpen, onClose, offDay}:OffDayModalProps) => {
                         <FormLabel>Start Dato</FormLabel>
                         <Input
                             type="date"
+                            data-cy="start-date"
                             value={startDate}
                             onChange={(e) => setStartDate(e.target.value)}
                         />
@@ -78,6 +79,7 @@ const OffDayUpdateModal = ({isOpen, onClose, offDay}:OffDayModalProps) => {
                         <FormLabel>Start Tid</FormLabel>
                         <Input
                             type="time"
+                            data-cy="start-time"
                             value={startTime}
                             onChange={(e) => setStartTime(e.target.value)}
                         />
@@ -88,6 +90,7 @@ const OffDayUpdateModal = ({isOpen, onClose, offDay}:OffDayModalProps) => {
                         <FormLabel>Slut Dato</FormLabel>
                         <Input
                             type="date"
+                            data-cy="end-date"
                             value={endDate}
                             onChange={(e) => setEndDate(e.target.value)}
                         />
@@ -96,6 +99,7 @@ const OffDayUpdateModal = ({isOpen, onClose, offDay}:OffDayModalProps) => {
                         <FormLabel>Slut Tid</FormLabel>
                         <Input
                             type="time"
+                            data-cy="end-time"
                             value={endTime}
                             onChange={(e) => setEndTime(e.target.value)}
                         />
@@ -105,10 +109,10 @@ const OffDayUpdateModal = ({isOpen, onClose, offDay}:OffDayModalProps) => {
                   
                 </ModalBody>
                 <ModalFooter>
-                  <Button variant="cancel" mr={3} onClick={onClose}>
+                  <Button data-cy="cancel-button" variant="cancel" mr={3} onClick={onClose}>
                     Luk
                   </Button>
-                  <Button variant="primary"type="submit">
+                  <Button data-cy="save-button" variant="primary"type="submit">
                     Gem
                   </Button>
                 </ModalFooter>

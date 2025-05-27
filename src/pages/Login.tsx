@@ -50,7 +50,8 @@ const Logind = ()=> {
       <FormControl mb={4}>
         <FormLabel>Email</FormLabel>
         <Input 
-        type="email" 
+        type="email"
+        data-cy="email"
         placeholder="staff@example.com" 
         value={email}
         onChange={(e) => setEmail(e.target.value)}/>
@@ -59,11 +60,12 @@ const Logind = ()=> {
         <FormLabel>Password</FormLabel>
         <Input 
         type="password"
+        data-cy="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         />
       </FormControl>
-      <Button colorScheme="blue" onClick={handleLoginBtn}>Login</Button>
+      <Button data-cy="login-button" colorScheme="blue" onClick={handleLoginBtn}>Login</Button>
     </Flex>
   );
 };

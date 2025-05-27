@@ -92,7 +92,7 @@ const Services = () => {
   return (
     <>
       <RoleGuard allowedRoles={["company_admin"]}>
-        <Button variant="success" mr={3} mb={5} onClick={handleOnOpenCreateModal}>
+        <Button data-cy="create-service-button" variant="success" mr={3} mb={5} onClick={handleOnOpenCreateModal}>
           Opret Service
         </Button>
       </RoleGuard>

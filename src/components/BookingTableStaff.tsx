@@ -85,6 +85,7 @@ const BookingTableStaff = () => {
     <Input
       fontWeight={600}
       type="date"
+      data-cy="booking-date-input"
       value={selectedDate.format("YYYY-MM-DD")}
       onChange={handleDateChange}
       min={today.format("YYYY-MM-DD")}
@@ -100,7 +101,7 @@ const BookingTableStaff = () => {
       onClick={handleNextDay}
     />
   </Flex>
-  <Button variant="success" leftIcon={<LuCalendarPlus/>} size={"sm"} mb={4} onClick={handleCreateBooking}>
+  <Button data-cy="create-booking-btn" variant="success" leftIcon={<LuCalendarPlus/>} size={"sm"} mb={4} onClick={handleCreateBooking}>
     Opret Booking
   </Button>
 

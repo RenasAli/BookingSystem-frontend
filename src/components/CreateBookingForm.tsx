@@ -26,12 +26,14 @@ const CreateBookingForm = ({
                     <FormLabel>Navn</FormLabel>
                     <Input
                         type="text"
+                        data-cy="customer-name"
                         mb={5}
                         onChange={(e)=> setBookingField("customerName",  e.target.value)}
                     />
                     <FormLabel>Mobile Nr.</FormLabel>
                     <Input
                         type="number"
+                        data-cy="customer-phone"
                         mb={5}
                         onChange={(e)=> setBookingField("customerPhone",  e.target.value)}
                     />
@@ -43,11 +45,11 @@ const CreateBookingForm = ({
                     </CardBody>
                 </Card>
                 <HStack>
-                    <Button colorScheme='gray' variant='solid' onClick={handleBack}>
+                    <Button data-cy="back-button" colorScheme='gray' variant='solid' onClick={handleBack}>
                         Tilbage
                     </Button>
                     <Spacer/>
-                    <Button colorScheme="green" type="submit">
+                    <Button data-cy="submit-button" colorScheme="green" type="submit">
                         Godkend
                     </Button>
                 </HStack>

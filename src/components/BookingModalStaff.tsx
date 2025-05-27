@@ -85,10 +85,18 @@ import {
     };
   
     const handleUpdate = async () => {
-      if (editableBooking) {
-        await updateMutation.mutateAsync(editableBooking);
-      }
-    };
+  if (!editableBooking) return;
+
+  const { startTime, endTime } = editableBooking;
+
+  if (!dayjs(startTime).isValid() || !dayjs(endTime).isValid()) {
+    console.error("Invalid start or end time.");
+    return; // Don't submit!
+  }
+
+  await updateMutation.mutateAsync(editableBooking);
+};
+
     if (!booking) return null;
   
     return (
@@ -108,6 +116,7 @@ import {
                     name="startTime_date"
                     type="date"
                     value={dayjs.utc(editableBooking?.startTime).format("YYYY-MM-DD")}
+                    data-cy="start-date"
                     onChange={handleInputChange}
                     onFocus={(e) => e.target.showPicker()}
                   />
@@ -118,6 +127,7 @@ import {
                     name="startTime_time"
                     type="time"
                     value={dayjs.utc(editableBooking?.startTime).format("HH:mm")}
+                    data-cy="start-time"
                     onChange={handleInputChange}
                     onFocus={(e) => e.target.showPicker()}
                   />
@@ -128,6 +138,7 @@ import {
                     name="endTime_time"
                     type="time"
                     value={dayjs.utc(editableBooking?.endTime).format("HH:mm")}
+                    data-cy="end-time"
                     onChange={handleInputChange}
                     onFocus={(e) => e.target.showPicker()}
                   />
@@ -137,7 +148,7 @@ import {
               <>
                 <Box mb={2}>
                   <Text fontWeight="bold">Navn:</Text>
-                  <Text>{booking.customerName}</Text>
+                  <Text data-cy="customer-name">{booking.customerName}</Text>
                 </Box>
   
                 <Box mb={2}>
@@ -183,11 +194,11 @@ import {
           </ModalBody>
           <ModalFooter>
             {isEditing ? (
-              <Button colorScheme="blue" onClick={handleUpdate} mr={3}>
+              <Button data-cy="save-btn" colorScheme="blue" onClick={handleUpdate} mr={3}>
                 Gem
               </Button>
             ) : (
-              <Button colorScheme="blue" onClick={() => setIsEditing(true)} mr={3}>
+              <Button data-cy="update-booking-btn" colorScheme="blue" onClick={() => setIsEditing(true)} mr={3}>
                 Opdater
               </Button>
             )}

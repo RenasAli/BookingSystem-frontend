@@ -20,7 +20,7 @@ const Profile = () => {
             borderWidth="1px"
             borderRadius="md"
         >
-            <Heading fontSize="lg" mb={4}>Arbejdstider</Heading>
+            <Heading data-cy="workdays-heading" fontSize="lg" mb={4}>Arbejdstider</Heading>
             <SimpleGrid columns={[1,2 , 3]} spacing={8} >
             {staffQuery?.data?.staffWorkdays?.map((day) => (
                 <Box

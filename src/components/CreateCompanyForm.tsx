@@ -58,9 +58,9 @@ import {
           <Tabs >
             <TabList>
               <Tab>Info</Tab>
-              <Tab>Ejer</Tab>
-              <Tab>Adresse</Tab>
-              <Tab>Åbningstider</Tab>
+              <Tab data-cy="admin-tab">Ejer</Tab>
+              <Tab data-cy="address-tab">Adresse</Tab>
+              <Tab data-cy="open-hours-tab">Åbningstider</Tab>
             </TabList>
             <TabPanels>
               <TabPanel>
@@ -76,6 +76,7 @@ import {
                       <FormLabel>Virksomhedens Navn</FormLabel>
                       <Input
                         type="text"
+                        data-cy="company-name-input"
                         onChange={(e) => onChange("companyName", e.target.value)}
                       />
                     </FormControl>
@@ -84,6 +85,7 @@ import {
                       <FormLabel>CVR</FormLabel>
                       <Input
                         type="number"
+                        data-cy="cvr-input"
                         onChange={(e) => onChange("cvr", e.target.value)}
                       />
                     </FormControl>
@@ -92,6 +94,7 @@ import {
                       <FormLabel>Virksomhedens Email</FormLabel>
                       <Input
                         type="email"
+                        data-cy="company-email-input"
                         onChange={(e) => onChange("companyEmail", e.target.value)}
                       />
                     </FormControl>
@@ -100,6 +103,7 @@ import {
                       <FormLabel >Virksomhedens Tlf</FormLabel>
                       <Input
                         type="number"
+                        data-cy="company-phone-input"
                         onChange={(e) => onChange("companyPhone", e.target.value)}
                       />
                     </FormControl>
@@ -108,6 +112,7 @@ import {
                       <FormLabel>Logo</FormLabel>
                       <Input
                         type="file"
+                        data-cy="profile-pic-input"
                         accept="image/*"
                         onChange={(e) => onChange("logo" , e.target.files?.[0])}
                       />
@@ -117,6 +122,7 @@ import {
                       <FormLabel>URL</FormLabel>
                       <Input
                         type="text"
+                        data-cy="company-url-input"
                         onChange={(e) => onChange("url", e.target.value)}
                       />
                     </FormControl>
@@ -124,6 +130,7 @@ import {
                       <FormLabel>Bekræftelsesmetode</FormLabel>
                       <Select
                         placeholder="Vælg en metode"
+                        data-cy="confirmation-method-select"
                         onChange={(e) => onChange("confirmationMethod", e.target.value)}
                       >
                         <option value="confirmation_code">SMS Bekræftelse</option>
@@ -146,6 +153,7 @@ import {
                       <FormLabel>Ejers Email</FormLabel>
                       <Input
                         type="email"
+                        data-cy="admin-email-input"
                         onChange={(e) => onChange("adminEmail", e.target.value)}
                       />
                     </FormControl>
@@ -153,6 +161,7 @@ import {
                       <FormLabel>Ejers Navn</FormLabel>
                       <Input
                         type="name"
+                        data-cy="admin-name-input"
                         onChange={(e) => onChange("adminName", e.target.value)}
                       />
                     </FormControl>
@@ -161,6 +170,7 @@ import {
                       <Input
                         autoComplete="new-password"
                         type="password"
+                        data-cy="admin-password-input"
                         onChange={(e) => onChange("adminPassword", e.target.value)}
                       />
                     </FormControl>
@@ -181,6 +191,7 @@ import {
                       <FormLabel>Adresse</FormLabel>
                       <Input
                         type="text"
+                        data-cy="company-street-input"
                         onChange={(e) => onChange("street", e.target.value)}
                       />
                     </FormControl>
@@ -189,6 +200,7 @@ import {
                       <FormLabel>By</FormLabel>
                       <Input
                         type="text"
+                        data-cy="company-city-input"
                         onChange={(e) => onChange("city", e.target.value)}
                       />
                     </FormControl>
@@ -197,6 +209,7 @@ import {
                       <FormLabel>Postnummer</FormLabel>
                       <Input
                         type="number"
+                        data-cy="company-zip-input"
                         onChange={(e) => onChange("zipCode", e.target.value)}
                       />
                     </FormControl>
@@ -225,6 +238,7 @@ import {
                               <HStack>
                                 <FormLabel>{["Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag", "Søndag"][day.weekdayId - 1]}</FormLabel>
                                 <Checkbox
+                                  data-cy={`company-workday-start-${day.weekdayId}`}
                                   onChange={(e) => handleWorkdayChange(index, "isOpen", e.target.checked)}
                                 />
                               </HStack>
@@ -233,6 +247,7 @@ import {
                                 <FormControl>
                                     <Input
                                       type="time"
+                                      data-cy={`company-workday-start-time-${day.weekdayId}`}
                                       onChange={(e) => handleWorkdayChange(index, "openTime", e.target.value)}
                                     />
                                 </FormControl>
@@ -243,6 +258,7 @@ import {
                                 <FormControl>
                                   <Input
                                     type="time"
+                                    data-cy={`company-workday-end-time-${day.weekdayId}`}
                                     onChange={(e) => handleWorkdayChange(index, "closeTime", e.target.value)}
                                   />
                                 </FormControl>
@@ -258,7 +274,7 @@ import {
 
           
           <Stack direction="row" spacing={4} mr={3}  justify="flex-end">
-            <Button colorScheme="green" type="submit">
+            <Button data-cy="submit-button" colorScheme="green" type="submit">
               Opret
             </Button>
           </Stack>

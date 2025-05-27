@@ -46,6 +46,7 @@ const ProfileForm = ({staff}: ProfileFormProps) => {
                         <FormLabel>Navn</FormLabel>
                         <Input
                             type="text"
+                            data-cy="profile-name"
                             value={staffData.name ?? ""}
                             onChange={(e) => onChange("name", e.target.value)}
                         />
@@ -54,6 +55,7 @@ const ProfileForm = ({staff}: ProfileFormProps) => {
                         <FormLabel>Email</FormLabel>
                         <Input
                             type="email"
+                            data-cy="profile-email"
                             value={staffData.email ?? ""}
                             onChange={(e) => onChange("email", e.target.value)}
                         />
@@ -62,12 +64,13 @@ const ProfileForm = ({staff}: ProfileFormProps) => {
                         <FormLabel>Mobile</FormLabel>
                         <Input
                             type="number"
+                            data-cy="profile-phone"
                             value={staffData.phone ?? ""}
                             onChange={(e) => onChange("phone", e.target.value)}
                         />
                     </FormControl> 
                 </SimpleGrid>
-                <Button variant="primary" type="submit" mt={5}>
+                <Button data-cy="save-button" variant="primary" type="submit" mt={5}>
                     Gem
                 </Button>
             </Box>
