@@ -59,12 +59,12 @@ const PublicBooking = () => {
     const timeSlotQuery = useTimeSlot(`companyId=${company?.id}&date=${selectedDate.toDate()}&duration=${durationMinutes}`);
     
     const mergeDateAndTime = (date: dayjs.Dayjs, timeStr: string): Date => {
-        const [hours, minutes] = timeStr.split('.').map(Number);
+        const [hours, minutes] = timeStr.split(':').map(Number);
         return date.hour(hours + 2).minute(minutes).second(0).millisecond(0).toDate();
     };
     const setBookingField = (field: keyof BookingRequest, value: unknown) => {
         setBooking((prev) => ({ ...prev, [field]: value } as BookingRequest));
-      };
+    };
 
     const handleBack =()=> {
         setSelectedTime({
