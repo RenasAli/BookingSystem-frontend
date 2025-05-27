@@ -164,7 +164,7 @@ import {
                 <Box mb={2}>
                   <Text fontWeight="bold">Tid:</Text>
                   <Text>
-                    {dayjs(booking.startTime).format("HH:mm")} - {dayjs(booking.endTime).format("HH:mm")}
+                    {dayjs.utc(booking.startTime).format("HH:mm")} - {dayjs.utc(booking.endTime).format("HH:mm")}
                   </Text>
                 </Box>
   

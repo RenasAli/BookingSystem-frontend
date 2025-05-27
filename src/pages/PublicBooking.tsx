@@ -56,7 +56,7 @@ const PublicBooking = () => {
           setDurationMinutes(selectedService.durationMinutes);
         }
       };
-    const timeSlotQuery = useTimeSlot(`companyId=${company?.id}&date=${selectedDate}&duration=${durationMinutes}`);
+    const timeSlotQuery = useTimeSlot(`companyId=${company?.id}&date=${selectedDate.toDate()}&duration=${durationMinutes}`);
     
     const mergeDateAndTime = (date: dayjs.Dayjs, timeStr: string): Date => {
         const [hours, minutes] = timeStr.split('.').map(Number);
@@ -99,7 +99,6 @@ const PublicBooking = () => {
         
         try {
             const response = await createMutation.mutateAsync(newBooking);
-            console.log("Booking response:", response.data);
             if (company?.confirmationMethod === "confirmation_code") {
                 setOtpStep(true);
                 setBookingData({
@@ -107,7 +106,6 @@ const PublicBooking = () => {
                     companyId: response.data.companyId,
                     phoneNumber: formattedPhoneNumber,
                 });
-                console.log("test");
             } else if(company?.confirmationMethod === "depositum") {
                 window.location.href = response.data;
             } else {

@@ -6,6 +6,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import CreateOffDay from '../types/CreateOffDate';
 import Staff from '../types/Staff';
 import { IoCloseOutline } from "react-icons/io5";
+import { getLocalDateAndTimeString } from '../utils/localDateString';
 
 interface OffDayModalProps {
     isOpen: boolean;
@@ -42,7 +43,7 @@ const CreateOffDateModal = ({isOpen, onClose}: OffDayModalProps) => {
 
     const getISODateTime = (date: string, time: string) => {
         if (!date || !time) return '';
-        return new Date(`${date}T${time}`).toISOString();
+        return getLocalDateAndTimeString(new Date(`${date}T${time}`));
     };
 
     const createMutation = useCreateMutation<CreateOffDay>({ endpoint: `off-day`, method: "POST", onSuccess: async() => {
