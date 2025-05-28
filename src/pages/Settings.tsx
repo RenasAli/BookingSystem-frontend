@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import CompanyForm from "../components/CompanyForm"
 import { useCreateMutation } from "../hooks/useCreateMutation";
-import Company, { CompanyRequest } from "../types/Copmpany";
+import Company, { CompanyRequest, UpdateCompanyAndAdmin } from "../types/Copmpany";
 import { useQueryClient } from "@tanstack/react-query";
 import { useCompanyById } from "../hooks/useCompany";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -20,7 +20,7 @@ const Settings = () => {
   const [company, setCompany] = useState<Company>();
 
   
-  const updateMutation = useCreateMutation<Company>({ endpoint: `company/${company?.id}`, method: "PUT", onSuccess: async() => {
+  const updateMutation = useCreateMutation<UpdateCompanyAndAdmin>({ endpoint: `company/${company?.id}`, method: "PUT", onSuccess: async() => {
     await queryClient.invalidateQueries({queryKey: ['company', company?.id]});
     await queryClient.refetchQueries({ queryKey: ["company",] });
     setCompany(undefined);
@@ -49,7 +49,21 @@ const Settings = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();      
     if (company) {
-      updateMutation.mutate(company);
+      const toUpdateCompany: UpdateCompanyAndAdmin = {
+        companyName: company.name,
+        cvr: company.cvr,
+        companyEmail: company.email,
+        logo: company.logo!,
+        url: company.url,
+        confirmationMethod: company.confirmationMethod,
+        companyPhone: company.phone,
+        adminEmail: company.user.email,
+        street: company.address.street,
+        city: company.address.city,
+        zipCode: company.address.zipCode,
+        workday: company.workday
+      }
+      updateMutation.mutate(toUpdateCompany);
     }
   };
 
