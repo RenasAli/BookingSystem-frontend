@@ -59,6 +59,7 @@ interface RoleGuardProps {
           props.isDisabled = true;
         } else if (type === "Input" || type === "input") {
           props.isReadOnly = true;
+          props.bg = "gray.100"
         } else {
           return fallback;
         }
