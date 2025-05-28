@@ -10,8 +10,8 @@ describe('Booking crud flow', () => {
     const startTimeUpdate = '14:15';
     const endTimeUpdate = '14:45';
 
-    const bookingDate = '2025-05-27';
-    const bookingDateUpdate = '2025-05-28';
+    const bookingDate = getNextWorkday();
+    const bookingDateUpdate = getNextWorkday(new Date(bookingDate));
 
     beforeEach(() => {
         cy.fixture('staff_form').then((user) => {
@@ -62,3 +62,14 @@ describe('Booking crud flow', () => {
         cy.deleteTestStaff();
     });
 });
+
+function getNextWorkday(start = new Date()) {
+    const date = new Date(start);
+    date.setDate(date.getDate() + 1);
+
+    while (date.getDay() === 0) {
+        date.setDate(date.getDate() + 1);
+    }
+
+    return date.toISOString().split('T')[0];
+}

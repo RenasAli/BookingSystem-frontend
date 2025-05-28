@@ -39,7 +39,7 @@ function trySelectFirstAvailableSlot(attempt = 1) {
         .should('exist')
         .then(($buttons) => {
             const matching = [...$buttons].filter((el) =>
-                /^\d{2}\.\d{2}$/.test(el.innerText)
+                /^\d{2}\:\d{2}$/.test(el.innerText)
             );
 
             if (matching.length) {
