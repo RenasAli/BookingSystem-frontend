@@ -4,8 +4,8 @@
     "price": "50.00",
     "duration": "60",
 
-    "nameUpdate": "Updated Test Service",
-    "descriptionUpdate": "This is an updated test service description.",
+    "nameUpdate": "Test Service 2",
+    "descriptionUpdate": "This is a 2. version of test service description.",
     "priceUpdate": "75.00",
-    "durationUpdate": "30"
+    "durationUpdate": "40"
 }

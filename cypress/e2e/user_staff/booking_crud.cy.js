@@ -56,6 +56,8 @@ describe('Booking crud flow', () => {
         cy.get('[data-cy="end-time"]').type(`${endTimeUpdate}`).blur();
 
         cy.get('[data-cy="save-btn"]').click();
+
+        cy.reload();
     });
 
     after(() => {
