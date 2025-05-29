@@ -94,6 +94,7 @@ describe('Off Day crud flow', () => {
             cy.get('[data-cy="confirm-delete-btn"]').click();
 
             cy.wait(500);
+            cy.reload();
             cy.contains('.chakra-card', staff.name).should('not.exist');
         });
     });

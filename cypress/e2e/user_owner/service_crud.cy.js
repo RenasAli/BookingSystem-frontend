@@ -70,7 +70,7 @@ describe('Service crud flow', () => {
                 });
 
             cy.get('[data-cy="confirm-delete-btn"]').click();
-
+            cy.reload();
             cy.contains('.chakra-card', service.nameUpdate).should('not.exist');
         });
 

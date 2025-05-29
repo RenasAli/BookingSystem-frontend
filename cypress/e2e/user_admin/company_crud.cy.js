@@ -47,8 +47,7 @@ describe('Company crud flow', () => {
         });
     });
 
-    // uncomment this test when the edit bug is fixed
-    /* it('should edit a company', () => {
+    it('should edit a company', () => {
 
         cy.fixture('company_form').then((company) => {
             cy.contains('td', company.companyName)
@@ -102,10 +101,10 @@ describe('Company crud flow', () => {
             cy.get('[data-cy="submit-button"]').click();
 
             cy.fixture('company_form').then((company) => {
-                cy.contains('td', company.companyName).should('be.visible');
+                cy.contains('td', company.companyNameUpdate).should('be.visible');
             });
         });
-    }); */
+    });
 
     it('should delete a company', () => {
         cy.fixture('company_form').then((company) => {
@@ -126,7 +125,11 @@ describe('Company crud flow', () => {
         cy.fixture('company_form').then((company) => {
             cy.contains('td', company.companyName).should('not.exist');
         });
+
         cy.wait(10000);
-        cy.get("[data-cy=company-btn]").should('be.visible');
+        cy.reload();
+        cy.fixture('company_form').then((company) => {
+            cy.contains('td', company.companyName).should('not.exist');
+        });
     });
 });
